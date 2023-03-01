@@ -1,19 +1,36 @@
 {
-  "name": "shopping-mall-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "express": "^4.18.2"
-  }
+    "name": "shopping-mall-backend",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "concurrently \"tsc -w\" \"nodemon dist/app\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/cookie-parser": "^1.4.3",
+        "@types/cors": "^2.8.13",
+        "@types/express": "^4.17.17",
+        "@types/morgan": "^1.9.4",
+        "concurrently": "^7.6.0",
+        "typescript": "^4.9.5"
+    },
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "cookie-parser": "^1.4.6",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "express-async-errors": "^3.1.1",
+        "express-validator": "^6.15.0",
+        "helmet": "^6.0.1",
+        "jsonwebtoken": "^9.0.0",
+        "morgan": "^1.10.0",
+        "mysql2": "^3.1.2",
+        "sequelize": "^6.29.0"
+    }
 }
