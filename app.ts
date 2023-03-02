@@ -4,11 +4,12 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
-import productsRouter from "./router/products.js";
+// import productsRouter from "./router/products.js";
 import cartsRouter from "./router/auth.js";
 import analyticsRouter from "./router/auth.js";
 import authRouter from "./router/auth.js";
 import { config } from "./config.js";
+import { sequelize } from "./db/database.js";
 
 const app = express();
 
@@ -47,6 +48,9 @@ app.use(
     }
 );
 
-const server = app.listen(config.port, () =>
-    console.log(`✅ node-express connected in ${new Date()}`)
-);
+sequelize.sync().then((client) => {
+    console.log("✔️  db-connected");
+    const server = app.listen(config.port, () =>
+        console.log(`✅ node-express connected in ${new Date()}`)
+    );
+});
