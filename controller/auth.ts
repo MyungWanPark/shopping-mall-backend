@@ -15,7 +15,7 @@ type AuthRequest = Request & {
     token?: string;
 };
 
-export async function signup(req: Request, res: Response) {
+export async function register(req: Request, res: Response) {
     const { email, password, age, gender, name, inflowRoute } = req.body;
     const found = await userRepository.findByEmail(email);
     if (found) {
@@ -30,18 +30,18 @@ export async function signup(req: Request, res: Response) {
         name,
         inflowRoute,
     });
-    const token = createJWTToken(email);
+    const token = createJWTToken(userId!);
     setToken(res, token);
     res.status(201).json({ token, email });
 }
 
 export async function login(req: Request, res: Response) {
-    const { username, password } = req.body;
-    const user = await userRepository.findByEmail(username);
+    const { email, password } = req.body;
+    const user = await userRepository.findByEmail(email);
     if (!user) {
         return res.status(401).json({ message: "Invalid user" });
     }
-
+    console.log(`user in login = ${JSON.stringify(user)}`);
     const isValidPassword = await bcrypt.compare(password, user.password!);
 
     if (!isValidPassword) {
@@ -49,7 +49,7 @@ export async function login(req: Request, res: Response) {
     }
     const token = createJWTToken(user.id!);
     setToken(res, token);
-    return res.status(200).json({ token, username });
+    return res.status(200).json({ token, email });
 }
 
 export async function logout(req: Request, res: Response, next: NextFunction) {
@@ -59,6 +59,8 @@ export async function logout(req: Request, res: Response, next: NextFunction) {
 
 export async function me(req: AuthRequest, res: Response, next: NextFunction) {
     const user = await userRepository.findById(req.userId!);
+    console.log(`user in me = ${JSON.stringify(user)}`);
+
     if (!user) {
         return res.status(404).json({ message: "User not found " });
     }

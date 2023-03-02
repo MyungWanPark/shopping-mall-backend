@@ -12,6 +12,7 @@ export const isAuth = async (
 ) => {
     let token: string | undefined;
     const authHeader = req.get("Authorization");
+
     if (authHeader && authHeader.startsWith("Bearer ")) {
         token = authHeader.split(" ")[1];
     }
@@ -25,10 +26,13 @@ export const isAuth = async (
 
     jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
         if (error) {
+            console.log(error);
             return res.status(401).json(AUTH_ERROR);
         }
         const decodedPayload = decoded as { id: number };
         const user = userRepository.findById(decodedPayload.id);
+        console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
+
         if (!user) {
             return res.status(401).json(AUTH_ERROR);
         }
