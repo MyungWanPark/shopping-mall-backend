@@ -22,6 +22,7 @@ export async function register(req: Request, res: Response) {
         return res.status(409).json({ message: `${email} already exists` });
     }
     const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+
     const userId = await userRepository.createUser({
         email,
         password: hashed,
@@ -38,10 +39,10 @@ export async function register(req: Request, res: Response) {
 export async function login(req: Request, res: Response) {
     const { email, password } = req.body;
     const user = await userRepository.findByEmail(email);
+
     if (!user) {
         return res.status(401).json({ message: "Invalid user" });
     }
-    console.log(`user in login = ${JSON.stringify(user)}`);
     const isValidPassword = await bcrypt.compare(password, user.password!);
 
     if (!isValidPassword) {
@@ -49,7 +50,7 @@ export async function login(req: Request, res: Response) {
     }
     const token = createJWTToken(user.id!);
     setToken(res, token);
-    return res.status(200).json({ token, email });
+    return res.status(200).json({ token, user });
 }
 
 export async function logout(req: Request, res: Response, next: NextFunction) {
@@ -59,12 +60,11 @@ export async function logout(req: Request, res: Response, next: NextFunction) {
 
 export async function me(req: AuthRequest, res: Response, next: NextFunction) {
     const user = await userRepository.findById(req.userId!);
-    console.log(`user in me = ${JSON.stringify(user)}`);
-
+    // console.log(`user in me() = ${JSON.stringify(user)}`);
     if (!user) {
         return res.status(404).json({ message: "User not found " });
     }
-    res.status(200).json({ token: req.token, username: user.name });
+    res.status(200).json({ token: req.token, user });
 }
 
 function createJWTToken(id: number) {

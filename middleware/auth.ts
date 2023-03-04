@@ -12,14 +12,12 @@ export const isAuth = async (
 ) => {
     let token: string | undefined;
     const authHeader = req.get("Authorization");
-
     if (authHeader && authHeader.startsWith("Bearer ")) {
         token = authHeader.split(" ")[1];
     }
     if (!token) {
         token = req.cookies["token"];
     }
-
     if (!token) {
         return res.status(401).json(AUTH_ERROR);
     }
@@ -31,7 +29,7 @@ export const isAuth = async (
         }
         const decodedPayload = decoded as { id: number };
         const user = userRepository.findById(decodedPayload.id);
-        console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
+        // console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
 
         if (!user) {
             return res.status(401).json(AUTH_ERROR);

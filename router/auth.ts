@@ -43,11 +43,11 @@ const validateSignup = [
 const router = express.Router();
 
 router.get("/register", authController.register);
-router.get("/login", isAuth, authController.login);
+router.get("/login", authController.login);
 router.get("/me", isAuth, authController.me);
 
-router.post("/register", isAuth, authController.register);
-router.post("/login", isAuth, authController.login);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
 router.post("/logout", isAuth, authController.logout);
 
 // router.get("/csrf-token", authController.csrfToken);

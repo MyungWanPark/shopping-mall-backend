@@ -63,7 +63,7 @@ export const User = sequelize.define<UserModel>("user", {
 });
 
 export async function findByEmail(email: string) {
-    return User.findOne({
+    return await User.findOne({
         where: {
             email,
         },
@@ -71,7 +71,7 @@ export async function findByEmail(email: string) {
 }
 
 export async function findById(id: number) {
-    return User.findByPk(id);
+    return await User.findByPk(id);
 }
 
 export async function createUser(user: UserInfo) {
