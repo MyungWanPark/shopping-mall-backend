@@ -31,9 +31,17 @@ export async function register(req: Request, res: Response) {
         name,
         inflowRoute,
     });
+    const user = {
+        email,
+        password: hashed,
+        age,
+        gender,
+        name,
+        inflowRoute,
+    };
     const token = createJWTToken(userId!);
     setToken(res, token);
-    res.status(201).json({ token, email });
+    return res.status(201).json({ token, user });
 }
 
 export async function login(req: Request, res: Response) {

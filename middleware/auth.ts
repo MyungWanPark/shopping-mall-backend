@@ -19,12 +19,13 @@ export const isAuth = async (
         token = req.cookies["token"];
     }
     if (!token) {
+        console.log("don't have a token in isAuth");
         return res.status(401).json(AUTH_ERROR);
     }
 
     jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
         if (error) {
-            console.log(error);
+            console.log(`jwt.verify error ${error}`);
             return res.status(401).json(AUTH_ERROR);
         }
         const decodedPayload = decoded as { id: number };
@@ -32,6 +33,7 @@ export const isAuth = async (
         // console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
 
         if (!user) {
+            console.log(`jwt.verify no user found error ${error}`);
             return res.status(401).json(AUTH_ERROR);
         }
         req.userId = decodedPayload.id;
