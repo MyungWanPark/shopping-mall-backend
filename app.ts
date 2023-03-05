@@ -8,6 +8,7 @@ import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import cartsRouter from "./router/auth.js";
 import analyticsRouter from "./router/auth.js";
 import authRouter from "./router/auth.js";
+import productRouter from "./router/products.js";
 import { config } from "./config.js";
 import { sequelize } from "./db/database.js";
 
@@ -29,6 +30,7 @@ app.use(morgan("tiny"));
 app.use("/auth", cartsRouter);
 app.use("/auth", analyticsRouter);
 app.use("/auth", authRouter);
+app.use("/products", productRouter);
 app.use("/", (req, res, next) => {
     res.send("hello world!");
 });

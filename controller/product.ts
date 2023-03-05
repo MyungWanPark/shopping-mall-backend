@@ -1,5 +1,6 @@
 import * as productRespository from "../data/productRepository.js";
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
+import { ProductInfo } from "../types/product.js";
 
 export async function getProducts(req: Request, res: Response) {
     const category = req.query.category as string;
@@ -7,6 +8,12 @@ export async function getProducts(req: Request, res: Response) {
         ? productRespository.getAllByCategory(category)
         : productRespository.getAll());
     res.status(200).json(data);
+}
+
+export async function addProduct(req: Request, res: Response) {
+    const productInfo: ProductInfo = req.body;
+    const product = await productRespository.createProduct(productInfo);
+    res.status(201).json(product);
 }
 
 /* export async function getTweetById(req, res) {
@@ -18,13 +25,6 @@ export async function getProducts(req: Request, res: Response) {
     } else {
         res.status(404).json({ message: `tweet(${id}) not found!` });
     }
-}
-
-export async function createTweet(req, res) {
-    const { text } = req.body;
-    const tweet = await tweetRespository.create(text, req.userId);
-    res.status(201).json(tweet);
-    getSocketIO().emit("tweets", tweet);
 }
 
 export async function updateTweetById(req, res) {

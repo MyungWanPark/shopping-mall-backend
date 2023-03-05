@@ -22,7 +22,7 @@ interface ProductModel
     id?: number;
     name?: string;
     category?: string;
-    imageURL?: string;
+    imgURL?: string;
     price?: number;
     description?: string;
     colors?: string;
@@ -44,7 +44,7 @@ export const Product = sequelize.define<ProductModel>("product", {
         type: DataTypes.STRING(45),
         allowNull: false,
     },
-    imageURL: {
+    imgURL: {
         type: DataTypes.TEXT,
         allowNull: false,
     },
@@ -59,6 +59,7 @@ export const Product = sequelize.define<ProductModel>("product", {
     },
     colors: {
         type: DataTypes.STRING(120),
+        defaultValue: JSON.stringify(["white", "black", "navy", "gray"]),
         allowNull: false,
     },
 });
@@ -100,6 +101,7 @@ export async function getById(id: number) {
 }
 
 export async function createProduct(product: ProductInfo) {
+    console.log(`product = ${JSON.stringify(product)}`);
     return Product.create(product).then((data) => data.dataValues.id);
 }
 
@@ -107,14 +109,14 @@ export async function updateById({
     id,
     name,
     category,
-    imageURL,
+    imgURL,
     price,
     description,
 }: ProductInfo) {
     return Product.findByPk(id).then((product) => {
         product!.name = name;
         product!.category = category;
-        product!.imageURL = imageURL;
+        product!.imgURL = imgURL;
         product!.price = price;
         product!.description = description;
         return product!.save();
