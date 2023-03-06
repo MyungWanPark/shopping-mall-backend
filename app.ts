@@ -11,6 +11,8 @@ import authRouter from "./router/auth.js";
 import productRouter from "./router/products.js";
 import { config } from "./config.js";
 import { sequelize } from "./db/database.js";
+import { Cart } from "./models/Cart.js";
+import { User } from "./models/User.js";
 
 const app = express();
 
@@ -49,6 +51,8 @@ app.use(
         res.sendStatus(500);
     }
 );
+User.hasOne(Cart);
+Cart.belongsTo(User, { targetKey: "id" });
 
 sequelize.sync().then((client) => {
     console.log("✔️  db-connected");

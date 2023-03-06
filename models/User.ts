@@ -1,6 +1,5 @@
 import SQ from "sequelize";
 import { sequelize } from "../db/database.js";
-import { UserInfo } from "../types/user.js";
 import {
     Sequelize,
     Model,
@@ -61,19 +60,3 @@ export const User = sequelize.define<UserModel>("user", {
         defaultValue: false,
     },
 });
-
-export async function findByEmail(email: string) {
-    return await User.findOne({
-        where: {
-            email,
-        },
-    });
-}
-
-export async function findById(id: number) {
-    return await User.findByPk(id);
-}
-
-export async function createUser(user: UserInfo) {
-    return User.create(user).then((data) => data.dataValues.id);
-}

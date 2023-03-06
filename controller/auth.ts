@@ -8,7 +8,7 @@ import {
     CookieOptions,
 } from "express";
 import { config } from "../config.js";
-import * as userRepository from "../data/userRepository.js";
+import * as userRepository from "../apis/user.js";
 
 type AuthRequest = Request & {
     userId?: number;

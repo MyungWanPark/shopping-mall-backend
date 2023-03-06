@@ -1,10 +1,10 @@
-import * as productRespository from "../data/productRepository.js";
+import * as productRespository from "../apis/product.js";
 import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 import { ProductInfo } from "../types/product.js";
 
 export async function getProducts(req: Request, res: Response) {
     const category = req.query.category as string;
-    const data = await (category === "all"
+    const data = await (category === "all" || category === undefined
         ? productRespository.getAll()
         : productRespository.getByCategory(category));
     res.status(200).json(data);
