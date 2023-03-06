@@ -1,4 +1,4 @@
-import SQ from "sequelize";
+import SQ, { Order } from "sequelize";
 import { sequelize } from "../db/database.js";
 import {
     Sequelize,
@@ -9,8 +9,10 @@ import {
 } from "sequelize";
 import { ProductInfo } from "../types/product.js";
 
-const ORDER_DESC = {
-    order: ["createdAt", "DESC"],
+const ORDER_DESC: {
+    order: Order;
+} = {
+    order: [["createdAt", "DESC"]],
 };
 
 interface ProductModel
@@ -73,7 +75,7 @@ export async function getByName(name: string) {
 }
 
 export async function getAll() {
-    return Product.findAll({
+    return await Product.findAll({
         ...ORDER_DESC,
     });
 }
@@ -87,7 +89,7 @@ export async function getAllByName(name: string) {
     });
 }
 
-export async function getAllByCategory(category: string) {
+export async function getByCategory(category: string) {
     return Product.findAll({
         where: {
             category,

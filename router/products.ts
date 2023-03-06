@@ -20,6 +20,7 @@ import { isAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
+router.get("/", isAuth, productController.getProducts);
 router.post("/new", isAuth, productController.addProduct);
 
 export default router;

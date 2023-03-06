@@ -4,9 +4,9 @@ import { ProductInfo } from "../types/product.js";
 
 export async function getProducts(req: Request, res: Response) {
     const category = req.query.category as string;
-    const data = await (category
-        ? productRespository.getAllByCategory(category)
-        : productRespository.getAll());
+    const data = await (category === "all"
+        ? productRespository.getAll()
+        : productRespository.getByCategory(category));
     res.status(200).json(data);
 }
 
