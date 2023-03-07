@@ -1,5 +1,9 @@
 import { Order } from "sequelize";
 import { Cart } from "../models/Cart.js";
+import { CartItem } from "../models/CartItem.js";
+import { CartItemType } from "../types/cart.js";
+import { ProductInfo } from "../types/product.js";
+import { findById as findUserById } from "./user.js";
 
 const ORDER_DESC: {
     order: Order;
@@ -8,10 +12,29 @@ const ORDER_DESC: {
 };
 
 export async function getCartByUserId(userId: number) {
-    return Cart.findOne({
+    return await Cart.findOne({
         where: {
             userId,
         },
+    });
+}
+
+export async function createCart(userId: number) {
+    return await Cart.create({ userId });
+}
+
+export async function addToCart(userId: number, product: CartItemType) {
+    let cart = await getCartByUserId(userId);
+    if (!cart) {
+        createCart(userId).then((data) => (cart = data));
+    }
+    return await CartItem.create({
+        quantity: product.quantity,
+        color: product.color,
+        size: product.size,
+        totalPricePerProduct: product.productPrice! * product.quantity!,
+        cartId: cart!.id,
+        productId: product.productId,
     });
 }
 

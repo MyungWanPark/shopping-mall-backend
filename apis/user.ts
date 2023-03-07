@@ -14,5 +14,5 @@ export async function findById(id: number) {
 }
 
 export async function createUser(user: UserInfo) {
-    return User.create(user).then((data) => data.dataValues.id);
+    return await User.create(user).then((data) => data.dataValues.id);
 }

@@ -9,11 +9,7 @@ import {
 } from "express";
 import { config } from "../config.js";
 import * as userRepository from "../apis/user.js";
-
-type AuthRequest = Request & {
-    userId?: number;
-    token?: string;
-};
+import { AuthRequest } from "../types/auth.js";
 
 export async function register(req: Request, res: Response) {
     const { email, password, age, gender, name, inflowRoute } = req.body;
