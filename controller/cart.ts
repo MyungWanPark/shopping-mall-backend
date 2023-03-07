@@ -16,11 +16,35 @@ export async function getCart(req: AuthRequest, res: Response) {
     res.status(200).json(cartInfo);
 }
 
+export async function getCartItems(req: AuthRequest, res: Response) {
+    const userId = req.userId as number;
+    const cartId = await cartAPIS
+        .getCartByUserId(userId)
+        .then((cart) => cart?.id);
+
+    const cartItems = await cartAPIS.getCartItemsByCartId(cartId!);
+    res.status(200).json(cartItems);
+}
+
 export async function addCart(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
     const cartItemBody: CartItemType = req.body;
     const cartItemInfo = await cartAPIS.addToCart(userId, cartItemBody);
     res.status(200).json(cartItemInfo);
+}
+
+export async function updateCartItem(req: AuthRequest, res: Response) {
+    const userId = req.userId as number;
+    const cartItemBody: CartItemType = req.body;
+    const cartItemInfo = await cartAPIS.updateCartItem(userId, cartItemBody);
+    res.status(200).json(cartItemInfo);
+}
+
+export async function deleteCartItem(req: AuthRequest, res: Response) {
+    const userId = req.userId as number;
+    const { productId }: CartItemType = req.body;
+    await cartAPIS.deleteCartItem(userId, productId!);
+    res.sendStatus(200);
 }
 
 /* export async function getTweetById(req, res) {

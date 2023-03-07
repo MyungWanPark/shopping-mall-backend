@@ -8,7 +8,7 @@ import {
     InferCreationAttributes,
 } from "sequelize";
 
-interface CartModel
+export interface CartModel
     extends Model<
         InferAttributes<CartModel>,
         InferCreationAttributes<CartModel>

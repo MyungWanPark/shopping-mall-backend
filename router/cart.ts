@@ -15,8 +15,10 @@ import { isAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/", isAuth, cartController.getCart);
+router.get("/", isAuth, cartController.getCartItems);
 router.post("/add", isAuth, cartController.addCart);
 router.post("/new", isAuth, cartController.createCart);
+router.put("/update", isAuth, cartController.updateCartItem);
+router.delete("/delete", isAuth, cartController.deleteCartItem);
 
 export default router;

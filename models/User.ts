@@ -6,6 +6,7 @@ import {
     DataTypes,
     InferAttributes,
     InferCreationAttributes,
+    ForeignKey,
 } from "sequelize";
 
 interface UserModel
@@ -22,6 +23,7 @@ interface UserModel
     age?: string;
     inflowRoute?: string;
     isAdmin?: boolean;
+    cartId?: ForeignKey<number>;
 }
 
 export const User = sequelize.define<UserModel>("user", {
