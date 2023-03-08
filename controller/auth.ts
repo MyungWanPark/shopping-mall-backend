@@ -12,8 +12,11 @@ import * as userRepository from "../apis/user.js";
 import { AuthRequest } from "../types/auth.js";
 
 export async function register(req: Request, res: Response) {
+    console.log("register fired!");
     const { email, password, age, gender, name, inflowRoute } = req.body;
     const found = await userRepository.findByEmail(email);
+    console.log(`found = ${JSON.stringify(found)}`);
+
     if (found) {
         return res.status(409).json({ message: `${email} already exists` });
     }
@@ -35,13 +38,19 @@ export async function register(req: Request, res: Response) {
         name,
         inflowRoute,
     };
+    console.log("before create JWTToken");
     const token = createJWTToken(userId!);
+    console.log("before setToken");
     setToken(res, token);
+    console.log("res.status(201).json({ token, user })");
+    if (name === "anonymous") {
+        return;
+    }
     return res.status(201).json({ token, user });
 }
 
 export async function login(req: Request, res: Response) {
-    const { email, password } = req.body;
+    const { email, password } = req.body as { email: string; password: string };
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
@@ -54,6 +63,9 @@ export async function login(req: Request, res: Response) {
     }
     const token = createJWTToken(user.id!);
     setToken(res, token);
+    if (email.includes("anonymous")) {
+        return;
+    }
     return res.status(200).json({ token, user });
 }
 

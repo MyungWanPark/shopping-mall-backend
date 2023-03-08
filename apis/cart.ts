@@ -4,7 +4,7 @@ import { CartItem } from "../models/CartItem.js";
 import { CartItemType } from "../types/cart.js";
 import { ProductInfo } from "../types/product.js";
 import { findById as findUserById } from "./user.js";
-
+import { createUser } from "./user";
 const ORDER_DESC: {
     order: Order;
 } = {
@@ -12,11 +12,26 @@ const ORDER_DESC: {
 };
 
 export async function getCartByUserId(userId: number) {
-    return await Cart.findOne({
+    let cart = await Cart.findOne({
         where: {
             userId,
         },
     });
+    /* if (!cart) {
+        await createUser({
+            id?: number;
+    password?: string;
+    email?: string;
+    name?: string;
+    gender?: string;
+    age?: string;
+    inflowRoute?: string;
+    isAdmin?: boolean;
+        });
+        cart = await createCart(userId);
+    } */
+
+    return cart;
 }
 
 export async function getCartItemsByCartId(cartId: number) {

@@ -12,12 +12,15 @@ export async function createCart(req: AuthRequest, res: Response) {
 
 export async function getCart(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
+    console.log(`userId = ${userId}`);
     const cartInfo = await cartAPIS.getCartByUserId(userId);
     res.status(200).json(cartInfo);
 }
 
 export async function getCartItems(req: AuthRequest, res: Response) {
-    const userId = req.userId as number;
+    let userId = req.userId as number;
+    console.log(`userId = ${userId}`);
+
     const cartId = await cartAPIS
         .getCartByUserId(userId)
         .then((cart) => cart?.id);
