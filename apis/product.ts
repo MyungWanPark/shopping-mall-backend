@@ -9,7 +9,7 @@ const ORDER_DESC: {
 };
 
 export async function getByName(name: string) {
-    return Product.findOne({
+    return await Product.findOne({
         where: {
             name,
         },
@@ -23,7 +23,7 @@ export async function getAll() {
 }
 
 export async function getAllByName(name: string) {
-    return Product.findAll({
+    return await Product.findAll({
         where: {
             name,
         },
@@ -32,7 +32,7 @@ export async function getAllByName(name: string) {
 }
 
 export async function getByCategory(category: string) {
-    return Product.findAll({
+    return await Product.findAll({
         where: {
             category,
         },
@@ -41,12 +41,12 @@ export async function getByCategory(category: string) {
 }
 
 export async function getById(id: number) {
-    return Product.findByPk(id);
+    return await Product.findByPk(id);
 }
 
 export async function createProduct(product: ProductInfo) {
     console.log(`product = ${JSON.stringify(product)}`);
-    return Product.create(product).then((data) => data.dataValues.id);
+    return await Product.create(product).then((data) => data.dataValues.id);
 }
 
 export async function updateById({
@@ -57,7 +57,7 @@ export async function updateById({
     price,
     description,
 }: ProductInfo) {
-    return Product.findByPk(id).then((product) => {
+    return await Product.findByPk(id).then((product) => {
         product!.name = name;
         product!.category = category;
         product!.imgURL = imgURL;

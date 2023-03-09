@@ -16,17 +16,12 @@ export async function addProduct(req: Request, res: Response) {
     res.status(201).json(product);
 }
 
-/* export async function getTweetById(req, res) {
-    const id = req.params.id;
-    const tweet = await tweetRespository.getById(id);
-
-    if (tweet) {
-        res.status(200).json(tweet);
-    } else {
-        res.status(404).json({ message: `tweet(${id}) not found!` });
-    }
+export async function getProductInfo(req: Request, res: Response) {
+    const productId = req.params.id;
+    const product = await productAPIS.getById(parseInt(productId));
+    res.status(201).json(product);
 }
-
+/*
 export async function updateTweetById(req, res) {
     const id = req.params.id;
     const { text } = req.body;

@@ -9,13 +9,16 @@ import {
 } from "express";
 import { config } from "../config.js";
 import * as userRepository from "../apis/user.js";
+import * as cartRepository from "../apis/cart.js";
 import { AuthRequest } from "../types/auth.js";
 
-export async function register(req: Request, res: Response) {
-    console.log("register fired!");
+export async function register(
+    req: Request & { userId?: number; token?: string },
+    res: Response,
+    next: NextFunction
+) {
     const { email, password, age, gender, name, inflowRoute } = req.body;
     const found = await userRepository.findByEmail(email);
-    console.log(`found = ${JSON.stringify(found)}`);
 
     if (found) {
         return res.status(409).json({ message: `${email} already exists` });
@@ -30,6 +33,7 @@ export async function register(req: Request, res: Response) {
         name,
         inflowRoute,
     });
+    cartRepository.createCart(userId!);
     const user = {
         email,
         password: hashed,
@@ -38,18 +42,21 @@ export async function register(req: Request, res: Response) {
         name,
         inflowRoute,
     };
-    console.log("before create JWTToken");
     const token = createJWTToken(userId!);
-    console.log("before setToken");
     setToken(res, token);
-    console.log("res.status(201).json({ token, user })");
     if (name === "anonymous") {
-        return;
+        req.userId = userId;
+        req.token = token;
+        return next();
     }
     return res.status(201).json({ token, user });
 }
 
-export async function login(req: Request, res: Response) {
+export async function login(
+    req: Request & { userId?: number; token?: string },
+    res: Response,
+    next: NextFunction
+) {
     const { email, password } = req.body as { email: string; password: string };
     const user = await userRepository.findByEmail(email);
 
@@ -64,7 +71,9 @@ export async function login(req: Request, res: Response) {
     const token = createJWTToken(user.id!);
     setToken(res, token);
     if (email.includes("anonymous")) {
-        return;
+        req.userId = user.id;
+        req.token = token;
+        return next();
     }
     return res.status(200).json({ token, user });
 }

@@ -20,6 +20,7 @@ export const isAuth = async (
     }
     if (!token) {
         token = req.cookies["token"];
+        console.log(`token in token = req.cookies["token"]; = ${token}`);
     }
     if (!token) {
         console.log("don't have a token in isAuth");
@@ -31,8 +32,8 @@ export const isAuth = async (
             password: parsedIp,
         };
         if (found) {
-            await login(req, res);
-            return res.status(401).json(AUTH_ERROR);
+            await login(req, res, next);
+            return;
         }
 
         req.body = {
@@ -42,8 +43,8 @@ export const isAuth = async (
             gender: "anonymous",
             inflowRoute: "anonymous",
         };
-        await register(req, res);
-        return res.status(401).json(AUTH_ERROR);
+        await register(req, res, next);
+        return;
 
         // return res.status(401).json(AUTH_ERROR);
         // return next();
@@ -56,7 +57,7 @@ export const isAuth = async (
         }
         const decodedPayload = decoded as { id: number };
         const user = userRepository.findById(decodedPayload.id);
-        // console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
+        console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
 
         if (!user) {
             console.log(`jwt.verify no user found error ${error}`);

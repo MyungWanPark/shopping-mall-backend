@@ -5,6 +5,7 @@ import { CartItemType } from "../types/cart.js";
 import { ProductInfo } from "../types/product.js";
 import { findById as findUserById } from "./user.js";
 import { createUser } from "./user";
+import { getById as getProductById } from "./product.js";
 const ORDER_DESC: {
     order: Order;
 } = {
@@ -51,11 +52,13 @@ export async function addToCart(userId: number, product: CartItemType) {
     if (!cart) {
         createCart(userId).then((data) => (cart = data));
     }
+    const productStaticInfo = await getProductById(product.productId!);
+
     return await CartItem.create({
         quantity: product.quantity,
         color: product.color,
         size: product.size,
-        totalPricePerProduct: product.productPrice! * product.quantity!,
+        totalPricePerProduct: productStaticInfo?.price! * product.quantity!,
         cartId: cart!.id,
         productId: product.productId,
     });
@@ -66,6 +69,7 @@ export async function updateCartItem(
     updatedItem: CartItemType
 ) {
     const userCart = (await getCartByUserId(userId)) as CartModel;
+    const productStaticInfo = await getProductById(updatedItem.productId!);
 
     return CartItem.findOne({
         where: {
@@ -78,7 +82,7 @@ export async function updateCartItem(
             cartItem.color = updatedItem.color;
             cartItem.size = updatedItem.size;
             cartItem.totalPricePerProduct =
-                updatedItem.quantity! * updatedItem.productPrice!;
+                updatedItem.quantity! * productStaticInfo?.price!;
             return cartItem.save();
         }
     });
