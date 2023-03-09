@@ -13,26 +13,11 @@ const ORDER_DESC: {
 };
 
 export async function getCartByUserId(userId: number) {
-    let cart = await Cart.findOne({
+    return await Cart.findOne({
         where: {
             userId,
         },
     });
-    /* if (!cart) {
-        await createUser({
-            id?: number;
-    password?: string;
-    email?: string;
-    name?: string;
-    gender?: string;
-    age?: string;
-    inflowRoute?: string;
-    isAdmin?: boolean;
-        });
-        cart = await createCart(userId);
-    } */
-
-    return cart;
 }
 
 export async function getCartItemsByCartId(cartId: number) {
@@ -78,6 +63,7 @@ export async function updateCartItem(
         },
     }).then((cartItem) => {
         if (cartItem && updatedItem) {
+            cartItem.isSelected = updatedItem.isSelected;
             cartItem.quantity = updatedItem.quantity;
             cartItem.color = updatedItem.color;
             cartItem.size = updatedItem.size;

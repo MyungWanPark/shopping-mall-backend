@@ -15,6 +15,7 @@ interface CartItemModel
     > {
     // Some fields are optional when calling UserModel.create() or UserModel.build()
     id?: number;
+    isSelected?: boolean;
     quantity?: number;
     color?: string;
     size?: string;
@@ -30,6 +31,11 @@ export const CartItem = sequelize.define<CartItemModel>("cartItem", {
         allowNull: false,
         primaryKey: true,
         unique: true,
+    },
+    isSelected: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
     },
     quantity: {
         type: DataTypes.INTEGER,
