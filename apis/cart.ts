@@ -28,6 +28,14 @@ export async function getCartItemsByCartId(cartId: number) {
     });
 }
 
+export async function getCartItemByProductId(productId: number) {
+    return await CartItem.findOne({
+        where: {
+            productId,
+        },
+    });
+}
+
 export async function createCart(userId: number) {
     return await Cart.create({ userId });
 }
@@ -54,8 +62,17 @@ export async function updateCartItem(
     updatedItem: CartItemType
 ) {
     const userCart = (await getCartByUserId(userId)) as CartModel;
+    console.log(
+        `updatedItem.productId in updateCartItem = ${JSON.stringify(
+            updatedItem.productId
+        )}`
+    );
     const productStaticInfo = await getProductById(updatedItem.productId!);
-
+    console.log(
+        `productStaticInfo in updateCartItem = ${JSON.stringify(
+            productStaticInfo
+        )}`
+    );
     return CartItem.findOne({
         where: {
             cartId: userCart.id,
@@ -64,6 +81,7 @@ export async function updateCartItem(
     }).then((cartItem) => {
         if (cartItem && updatedItem) {
             cartItem.isSelected = updatedItem.isSelected;
+            cartItem.isOrdered = updatedItem.isOrdered;
             cartItem.quantity = updatedItem.quantity;
             cartItem.color = updatedItem.color;
             cartItem.size = updatedItem.size;

@@ -18,8 +18,7 @@ export async function getCart(req: AuthRequest, res: Response) {
 }
 
 export async function getCartItems(req: AuthRequest, res: Response) {
-    let userId = req.userId as number;
-    console.log(`userId = ${userId}`);
+    const userId = req.userId as number;
 
     const cartId = await cartAPIS
         .getCartByUserId(userId)
@@ -32,6 +31,12 @@ export async function getCartItems(req: AuthRequest, res: Response) {
 export async function addCart(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
     const cartItemBody: CartItemType = req.body;
+    const isExist = await cartAPIS.getCartItemByProductId(
+        cartItemBody.productId!
+    );
+    if (isExist) {
+        return updateCartItem(req, res);
+    }
     const cartItemInfo = await cartAPIS.addToCart(userId, cartItemBody);
     res.status(200).json(cartItemInfo);
 }
@@ -49,44 +54,3 @@ export async function deleteCartItem(req: AuthRequest, res: Response) {
     await cartAPIS.deleteCartItem(userId, productId!);
     res.sendStatus(200);
 }
-
-/* export async function getTweetById(req, res) {
-    const id = req.params.id;
-    const tweet = await tweetRespository.getById(id);
-
-    if (tweet) {
-        res.status(200).json(tweet);
-    } else {
-        res.status(404).json({ message: `tweet(${id}) not found!` });
-    }
-}
-
-export async function updateTweetById(req, res) {
-    const id = req.params.id;
-    const { text } = req.body;
-    const tweet = await tweetRespository.getById(id);
-
-    if (!tweet) {
-        return res.status(404).json({ message: `Tweet not found id(${id})` });
-    }
-
-    if (tweet.userId !== req.userId) {
-        return res.sendStatus(403);
-    }
-    const updatedTweet = await tweetRespository.updateById(id, text);
-    res.status(200).json(updatedTweet);
-}
-
-export async function deleteTweetById(req, res) {
-    const id = req.params.id;
-    const tweet = await tweetRespository.getById(id);
-
-    if (!tweet) {
-        return res.status(404).json({ message: `Tweet not found id(${id})` });
-    }
-    if (tweet.userId !== req.userId) {
-        return res.sendStatus(403);
-    }
-    const deletedTweet = await tweetRespository.removeById(id);
-    res.status(200).json(deletedTweet);
-} */

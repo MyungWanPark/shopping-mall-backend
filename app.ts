@@ -9,12 +9,14 @@ import analyticsRouter from "./router/auth.js";
 import authRouter from "./router/auth.js";
 import productRouter from "./router/products.js";
 import cartRouter from "./router/cart.js";
+import orderRouter from "./router/order.js";
 import { config } from "./config.js";
 import { sequelize } from "./db/database.js";
 import { Cart } from "./models/Cart.js";
 import { User } from "./models/User.js";
 import { Product } from "./models/Product.js";
 import { CartItem } from "./models/CartItem.js";
+import { Order } from "./models/Order.js";
 
 const app = express();
 
@@ -34,6 +36,7 @@ app.use(morgan("tiny"));
 app.use("/auth", authRouter);
 app.use("/products", productRouter);
 app.use("/cart", cartRouter);
+app.use("/order", orderRouter);
 
 // app.use("/auth", analyticsRouter);
 
