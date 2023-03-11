@@ -10,34 +10,30 @@ export async function createOrder(req: AuthRequest, res: Response) {
     const orderBody: OrderType = req.body;
     const orderInfo = await orderAPIS.createOrder(
         userId,
-        orderBody.cartItemId!
+        orderBody.cartItemIds!
     );
-    const existingCartItem = await CartItem.findByPk(orderBody.cartItemId);
-    console.log(
-        `existingCartItem in createOrder = ${JSON.stringify(existingCartItem)}`
-    );
-    console.log(
-        `tobeUpdated in createOrder = ${JSON.stringify({
-            ...existingCartItem?.dataValues,
+
+    const orderedCartItemIds = JSON.parse(orderBody.cartItemIds!) as number[];
+    const orderedCartItems = await Promise.all(
+        orderedCartItemIds.map(
+            async (cartItemId) => await CartItem.findByPk(cartItemId)
+        )
+    ).then((cartItems) => cartItems.filter((cartItem) => cartItem !== null));
+
+    orderedCartItems.forEach(async (orderedCartItem) => {
+        await cartAPIS.updateCartItem(userId, {
+            ...orderedCartItem?.dataValues,
             isOrdered: true,
-        })}`
-    );
-    await cartAPIS.updateCartItem(userId, {
-        ...existingCartItem?.dataValues,
-        isOrdered: true,
+        });
     });
+
     res.status(200).json(orderInfo);
 }
 
 export async function getOrder(req: AuthRequest, res: Response) {
-    const isByCartItem = req.query.cartItemId;
     const isByUserId = req.query.byUser;
     const isByPeriod = req.query.startDate;
 
-    if (isByCartItem) {
-        getOrderByCartItemId(req, res);
-        return;
-    }
     if (isByUserId) {
         getOrdersByUserId(req, res);
         return;
@@ -57,14 +53,6 @@ export async function getOrdersByUserId(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
     const orderInfos = await orderAPIS.getOrdersByUserId(userId);
     res.status(200).json(orderInfos);
-}
-
-export async function getOrderByCartItemId(req: AuthRequest, res: Response) {
-    const cartItemId = req.query.cartItemId as string;
-    const orderInfo = await orderAPIS.getOrderByCartItemId(
-        parseInt(cartItemId)
-    );
-    res.status(200).json(orderInfo);
 }
 
 export async function getOrdersByDate(req: AuthRequest, res: Response) {

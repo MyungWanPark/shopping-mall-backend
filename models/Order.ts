@@ -15,7 +15,7 @@ interface OrderModel
     > {
     // Some fields are optional when calling UserModel.create() or UserModel.build()
     id?: number;
-    cartItemId?: ForeignKey<number>;
+    cartItemIds?: ForeignKey<string>;
     userId?: ForeignKey<number>;
     createdAt?: Date;
 }
@@ -29,8 +29,8 @@ export const Order = sequelize.define<OrderModel>("order", {
         unique: true,
     },
 
-    cartItemId: {
-        type: DataTypes.INTEGER,
+    cartItemIds: {
+        type: DataTypes.STRING(45),
         allowNull: false,
     },
 

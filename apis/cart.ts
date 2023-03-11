@@ -62,26 +62,24 @@ export async function updateCartItem(
     updatedItem: CartItemType
 ) {
     const userCart = (await getCartByUserId(userId)) as CartModel;
-    console.log(
-        `updatedItem.productId in updateCartItem = ${JSON.stringify(
-            updatedItem.productId
-        )}`
-    );
     const productStaticInfo = await getProductById(updatedItem.productId!);
-    console.log(
-        `productStaticInfo in updateCartItem = ${JSON.stringify(
-            productStaticInfo
-        )}`
-    );
+
     return CartItem.findOne({
         where: {
             cartId: userCart.id,
             productId: updatedItem.productId,
+            isOrdered: false,
         },
     }).then((cartItem) => {
         if (cartItem && updatedItem) {
-            cartItem.isSelected = updatedItem.isSelected;
-            cartItem.isOrdered = updatedItem.isOrdered;
+            cartItem.isSelected =
+                updatedItem.isSelected == null
+                    ? cartItem.isSelected
+                    : updatedItem.isSelected;
+            cartItem.isOrdered =
+                updatedItem.isOrdered == null
+                    ? cartItem.isOrdered
+                    : updatedItem.isOrdered;
             cartItem.quantity = updatedItem.quantity;
             cartItem.color = updatedItem.color;
             cartItem.size = updatedItem.size;

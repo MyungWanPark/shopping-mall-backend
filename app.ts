@@ -61,10 +61,10 @@ app.use(
 
 User.hasOne(Cart);
 
-Product.belongsToMany(Cart, { through: CartItem });
+// Product.belongsToMany(Cart, { through: CartItem });
 
 Cart.belongsTo(User, { targetKey: "id" });
-Cart.belongsToMany(Product, { through: CartItem });
+// Cart.belongsToMany(Product, { through: CartItem });
 
 sequelize.sync().then((client) => {
     console.log("✔️  db-connected");

@@ -4,10 +4,10 @@ import { Op } from "sequelize";
 import * as cartAPIS from "../apis/cart.js";
 import { CartItem } from "./../models/CartItem.js";
 
-export async function createOrder(userId: number, cartItemId: number) {
+export async function createOrder(userId: number, cartItemIds: string) {
     return await Order.create({
         userId,
-        cartItemId,
+        cartItemIds,
     });
 }
 
@@ -19,14 +19,6 @@ export async function getOrdersByUserId(userId: number) {
     return await Order.findAll({
         where: {
             userId,
-        },
-    });
-}
-
-export async function getOrderByCartItemId(cartItemId: number) {
-    return await Order.findOne({
-        where: {
-            cartItemId,
         },
     });
 }

@@ -1,6 +1,6 @@
 export type OrderType = {
     id?: number;
-    cartItemId?: number;
+    cartItemIds?: string;
     userId?: number;
     createdAt?: Date;
 };

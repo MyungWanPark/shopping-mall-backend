@@ -21,8 +21,8 @@ interface CartItemModel
     color?: string;
     size?: string;
     totalPricePerProduct?: number;
-    cartId?: ForeignKey<number>;
-    productId?: ForeignKey<number>;
+    cartId?: number;
+    productId?: number;
 }
 
 export const CartItem = sequelize.define<CartItemModel>("cartItem", {
@@ -57,6 +57,14 @@ export const CartItem = sequelize.define<CartItemModel>("cartItem", {
     isOrdered: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+        allowNull: false,
+    },
+    cartId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    productId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 });

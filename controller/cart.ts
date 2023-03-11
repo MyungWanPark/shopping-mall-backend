@@ -12,7 +12,6 @@ export async function createCart(req: AuthRequest, res: Response) {
 
 export async function getCart(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
-    console.log(`userId = ${userId}`);
     const cartInfo = await cartAPIS.getCartByUserId(userId);
     res.status(200).json(cartInfo);
 }
@@ -34,7 +33,8 @@ export async function addCart(req: AuthRequest, res: Response) {
     const isExist = await cartAPIS.getCartItemByProductId(
         cartItemBody.productId!
     );
-    if (isExist) {
+    // console.log(`isExist in addCart = ${JSON.stringify(isExist)}`);
+    if (isExist && !isExist.isOrdered) {
         return updateCartItem(req, res);
     }
     const cartItemInfo = await cartAPIS.addToCart(userId, cartItemBody);

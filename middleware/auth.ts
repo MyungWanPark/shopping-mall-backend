@@ -20,7 +20,6 @@ export const isAuth = async (
     }
     if (!token) {
         token = req.cookies["token"];
-        console.log(`token in token = req.cookies["token"]; = ${token}`);
     }
     if (!token) {
         console.log("don't have a token in isAuth");
@@ -57,10 +56,8 @@ export const isAuth = async (
         }
         const decodedPayload = decoded as { id: number };
         const user = userRepository.findById(decodedPayload.id);
-        console.log(`decodedPayload = ${JSON.stringify(decodedPayload)}`);
 
         if (!user) {
-            console.log(`jwt.verify no user found error ${error}`);
             return res.status(401).json(AUTH_ERROR);
         }
         req.userId = decodedPayload.id;
