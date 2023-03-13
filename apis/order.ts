@@ -24,6 +24,7 @@ export async function getOrdersByUserId(userId: number) {
 }
 
 export async function getOrdersByDate(startDate: Date, endDate: Date) {
+    console.log("getOrdersByDate fired!");
     return await Order.findAll({
         where: {
             createdAt: {
