@@ -23,8 +23,7 @@ export async function getOrdersByUserId(userId: number) {
     });
 }
 
-export async function getOrdersByDate(startDate: Date, endDate: Date) {
-    console.log("getOrdersByDate fired!");
+export async function getOrdersByDate(startDate: string, endDate: string) {
     return await Order.findAll({
         where: {
             createdAt: {

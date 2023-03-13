@@ -33,6 +33,9 @@ export async function createOrder(req: AuthRequest, res: Response) {
 export async function getOrder(req: AuthRequest, res: Response) {
     const isByUserId = req.query.byUser;
     const isByPeriod = req.query.startDate;
+    console.log("getOrder fired!");
+    console.log(`isByPeriod = ${isByPeriod}`);
+    console.log(`typeof  = ${typeof isByPeriod}`);
 
     if (isByUserId) {
         getOrdersByUserId(req, res);
@@ -42,6 +45,8 @@ export async function getOrder(req: AuthRequest, res: Response) {
         getOrdersByDate(req, res);
         return;
     }
+
+    return res.status(401).json("queryParms not exist");
 }
 
 export async function getAllOrders(req: AuthRequest, res: Response) {
@@ -58,9 +63,6 @@ export async function getOrdersByUserId(req: AuthRequest, res: Response) {
 export async function getOrdersByDate(req: AuthRequest, res: Response) {
     const startDate = req.query.startDate as string;
     const endDate = req.query.endDate as string;
-    const ordersInfo = await orderAPIS.getOrdersByDate(
-        new Date(startDate),
-        new Date(endDate)
-    );
+    const ordersInfo = await orderAPIS.getOrdersByDate(startDate, endDate);
     res.status(200).json(ordersInfo);
 }
