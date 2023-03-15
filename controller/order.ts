@@ -33,9 +33,6 @@ export async function createOrder(req: AuthRequest, res: Response) {
 export async function getOrder(req: AuthRequest, res: Response) {
     const isByUserId = req.query.byUser;
     const isByPeriod = req.query.startDate;
-    console.log("getOrder fired!");
-    console.log(`isByPeriod = ${isByPeriod}`);
-    console.log(`typeof  = ${typeof isByPeriod}`);
 
     if (isByUserId) {
         getOrdersByUserId(req, res);

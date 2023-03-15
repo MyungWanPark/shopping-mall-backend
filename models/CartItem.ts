@@ -23,6 +23,7 @@ interface CartItemModel
     totalPricePerProduct?: number;
     cartId?: number;
     productId?: number;
+    createdAt?: Date;
 }
 
 export const CartItem = sequelize.define<CartItemModel>("cartItem", {

@@ -1,4 +1,4 @@
-import { Order } from "sequelize";
+import { Order, Op } from "sequelize";
 import { Cart, CartModel } from "../models/Cart.js";
 import { CartItem } from "../models/CartItem.js";
 import { CartItemType } from "../types/cart.js";
@@ -6,6 +6,7 @@ import { ProductInfo } from "../types/product.js";
 import { findById as findUserById } from "./user.js";
 import { createUser } from "./user";
 import { getById as getProductById } from "./product.js";
+
 const ORDER_DESC: {
     order: Order;
 } = {
@@ -32,6 +33,16 @@ export async function getCartItemByProductId(productId: number) {
     return await CartItem.findOne({
         where: {
             productId,
+        },
+    });
+}
+
+export async function getCartItemByDate(startDate: string, endDate: string) {
+    return await CartItem.findAll({
+        where: {
+            createdAt: {
+                [Op.between]: [startDate, endDate],
+            },
         },
     });
 }

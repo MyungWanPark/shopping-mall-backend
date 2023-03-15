@@ -16,7 +16,7 @@ export async function getCart(req: AuthRequest, res: Response) {
     res.status(200).json(cartInfo);
 }
 
-export async function getCartItems(req: AuthRequest, res: Response) {
+export async function getAllCartItems(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
 
     const cartId = await cartAPIS
@@ -25,6 +25,13 @@ export async function getCartItems(req: AuthRequest, res: Response) {
 
     const cartItems = await cartAPIS.getCartItemsByCartId(cartId!);
     res.status(200).json(cartItems);
+}
+
+export async function getCartItemsByDate(req: AuthRequest, res: Response) {
+    const startDate = req.query.startDate as string;
+    const endDate = req.query.endDate as string;
+    const cartInfo = await cartAPIS.getCartItemByDate(startDate, endDate);
+    res.status(200).json(cartInfo);
 }
 
 export async function addCart(req: AuthRequest, res: Response) {
