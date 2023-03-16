@@ -1,4 +1,4 @@
-import { Order } from "sequelize";
+import { Order, Op } from "sequelize";
 import { Product } from "../models/Product.js";
 import { ProductInfo } from "../types/product.js";
 
@@ -22,10 +22,12 @@ export async function getAll() {
     });
 }
 
-export async function getAllByName(name: string) {
+export async function getAllByKeyword(keyword: string) {
     return await Product.findAll({
         where: {
-            name,
+            name: {
+                [Op.like]: "%" + keyword + "%",
+            },
         },
         ...ORDER_DESC,
     });
