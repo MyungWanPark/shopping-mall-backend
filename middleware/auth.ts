@@ -40,7 +40,7 @@ export const isAuth = async (
             age: 999,
             name: "anonymous",
             gender: "anonymous",
-            inflowRoute: "anonymous",
+            inflowRoute: "etc",
         };
         await register(req, res, next);
         return;
