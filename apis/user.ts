@@ -18,6 +18,10 @@ export async function createUser(user: UserInfo) {
     return await User.create(user).then((data) => data.dataValues.id);
 }
 
+export async function findAllUsers() {
+    return await User.findAll();
+}
+
 export async function findUsersByDate(startDate: string, endDate: string) {
     return await User.findAll({
         where: {

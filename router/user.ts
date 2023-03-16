@@ -8,5 +8,6 @@ import { isAuth } from "../middleware/auth.js";
 const router = express.Router();
 
 router.get("/", userController.getUsersByDate);
+router.get("/all", userController.getAllUsers);
 
 export default router;
