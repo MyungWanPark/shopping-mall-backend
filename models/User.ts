@@ -24,6 +24,7 @@ interface UserModel
     inflowRoute?: string;
     isAdmin?: boolean;
     cartId?: ForeignKey<number>;
+    createdAt?: Date;
 }
 
 export const User = sequelize.define<UserModel>("user", {

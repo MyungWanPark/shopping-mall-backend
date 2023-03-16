@@ -7,6 +7,7 @@ import { Request, Response, NextFunction, ErrorRequestHandler } from "express";
 // import productsRouter from "./router/products.js";
 import analyticsRouter from "./router/auth.js";
 import authRouter from "./router/auth.js";
+import userRouter from "./router/user.js";
 import productRouter from "./router/products.js";
 import cartRouter from "./router/cart.js";
 import orderRouter from "./router/order.js";
@@ -34,6 +35,7 @@ app.use(morgan("tiny"));
 
 // app.use("/tweets", productsRouter);
 app.use("/auth", authRouter);
+app.use("/user", userRouter);
 app.use("/products", productRouter);
 app.use("/cart", cartRouter);
 app.use("/order", orderRouter);
