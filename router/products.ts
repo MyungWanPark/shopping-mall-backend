@@ -8,7 +8,7 @@ import { isAuth } from "../middleware/auth.js";
 // GET /products
 // GET /products/men
 // GET /products/women
-// GET /products/accessaries
+// GET /products/bag
 // GET /products/shoes
 // GET /products/:id
 // GET /products/new

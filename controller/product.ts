@@ -10,7 +10,7 @@ export async function getProducts(req: Request, res: Response) {
         return getProductByKeyword(req, res);
     }
 
-    const data = await (category === "all" || category === undefined
+    const data = await (category === "all" || category == "null"
         ? productAPIS.getAll()
         : productAPIS.getByCategory(category));
     res.status(200).json(data);
