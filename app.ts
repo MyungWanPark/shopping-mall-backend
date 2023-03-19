@@ -33,7 +33,6 @@ app.use(cors(corsOption));
 app.use(helmet());
 app.use(morgan("tiny"));
 
-// app.use("/tweets", productsRouter);
 app.use("/auth", authRouter);
 app.use("/user", userRouter);
 app.use("/products", productRouter);
