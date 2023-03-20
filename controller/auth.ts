@@ -44,11 +44,6 @@ export async function register(
     };
     const token = createJWTToken(userId!);
     setToken(res, token);
-    if (name === "anonymous") {
-        req.userId = userId;
-        req.token = token;
-        return next();
-    }
     return res.status(201).json({ token, user });
 }
 
@@ -69,12 +64,8 @@ export async function login(
         return res.status(401).json({ message: "invalid password" });
     }
     const token = createJWTToken(user.id!);
+    console.log(`token when login = ${token}`);
     setToken(res, token);
-    if (email.includes("anonymous")) {
-        req.userId = user.id;
-        req.token = token;
-        return next();
-    }
     return res.status(200).json({ token, user });
 }
 

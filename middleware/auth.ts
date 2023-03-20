@@ -13,7 +13,7 @@ export const isAuth = async (
     next: NextFunction
 ) => {
     let token: string | undefined;
-    console.log("isAuth fired!");
+
     const authHeader = req.get("Authorization");
     if (authHeader && authHeader.startsWith("Bearer ")) {
         token = authHeader.split(" ")[1];
@@ -21,32 +21,9 @@ export const isAuth = async (
     if (!token) {
         token = req.cookies["token"];
     }
+
     if (!token) {
-        console.log("don't have a token in isAuth");
-        const parsedIp = req.ip.replaceAll(":", "");
-        const email = `anonymous${parsedIp}@com`;
-        const found = await userRepository.findByEmail(email);
-        req.body = {
-            email: email,
-            password: parsedIp,
-        };
-        if (found) {
-            await login(req, res, next);
-            return;
-        }
-
-        req.body = {
-            ...req.body,
-            age: 999,
-            name: "anonymous",
-            gender: "anonymous",
-            inflowRoute: "etc",
-        };
-        await register(req, res, next);
-        return;
-
-        // return res.status(401).json(AUTH_ERROR);
-        // return next();
+        return res.status(401).json(AUTH_ERROR);
     }
 
     jwt.verify(token, config.jwt.secretKey, async (error, decoded) => {
@@ -61,6 +38,7 @@ export const isAuth = async (
             return res.status(401).json(AUTH_ERROR);
         }
         req.userId = decodedPayload.id;
+        console.log(`user id = ${decodedPayload.id}`);
         req.token = token;
         next();
     });
