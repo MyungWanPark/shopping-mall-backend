@@ -82,7 +82,6 @@ export async function logout(req: Request, res: Response, next: NextFunction) {
 
 export async function me(req: AuthRequest, res: Response, next: NextFunction) {
     const user = await userRepository.findById(req.userId!);
-    // console.log(`user in me() = ${JSON.stringify(user)}`);
     if (!user) {
         return res.status(404).json({ message: "User not found " });
     }

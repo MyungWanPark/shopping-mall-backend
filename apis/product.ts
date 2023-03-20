@@ -47,7 +47,6 @@ export async function getById(id: number) {
 }
 
 export async function createProduct(product: ProductInfo) {
-    console.log(`product = ${JSON.stringify(product)}`);
     return await Product.create(product).then((data) => data.dataValues.id);
 }
 

@@ -10,6 +10,6 @@ export async function getAllUsers(req: AuthRequest, res: Response) {
 export async function getUsersByDate(req: AuthRequest, res: Response) {
     const startDate = req.query.startDate as string;
     const endDate = req.query.endDate as string;
-    const cartInfo = await userAPIS.findUsersByDate(startDate, endDate);
-    res.status(200).json(cartInfo);
+    const user = await userAPIS.findUsersByDate(startDate, endDate);
+    res.status(200).json(user);
 }
