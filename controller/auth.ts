@@ -17,13 +17,13 @@ export async function register(
     res: Response,
     next: NextFunction
 ) {
-    const { email, password, age, gender, name, inflowRoute } = req.body;
+    const { email, password: pw, age, gender, name, inflowRoute } = req.body;
     const found = await userRepository.findByEmail(email);
 
     if (found) {
         return res.status(409).json({ message: `${email} already exists` });
     }
-    const hashed = await bcrypt.hash(password, config.bcrypt.saltRounds);
+    const hashed = await bcrypt.hash(pw, config.bcrypt.saltRounds);
 
     const userId = await userRepository.createUser({
         email,
@@ -44,7 +44,9 @@ export async function register(
     };
     const token = createJWTToken(userId!);
     setToken(res, token);
-    return res.status(201).json({ token, user });
+    const { password, ...userInfo } = user;
+    return res.status(201).json({ token, user: userInfo });
+    // return res.status(201).json({ token, email });
 }
 
 export async function login(
@@ -52,21 +54,25 @@ export async function login(
     res: Response,
     next: NextFunction
 ) {
-    const { email, password } = req.body as { email: string; password: string };
+    const { email, password: pw } = req.body as {
+        email: string;
+        password: string;
+    };
     const user = await userRepository.findByEmail(email);
 
     if (!user) {
         return res.status(401).json({ message: "Invalid user" });
     }
-    const isValidPassword = await bcrypt.compare(password, user.password!);
+    const isValidPassword = await bcrypt.compare(pw, user.password!);
 
     if (!isValidPassword) {
         return res.status(401).json({ message: "invalid password" });
     }
     const token = createJWTToken(user.id!);
-    console.log(`token when login = ${token}`);
     setToken(res, token);
-    return res.status(200).json({ token, user });
+
+    const { password, ...userInfo } = user.dataValues;
+    res.status(200).json({ token, user: userInfo });
 }
 
 export async function logout(req: Request, res: Response, next: NextFunction) {
@@ -80,7 +86,8 @@ export async function me(req: AuthRequest, res: Response, next: NextFunction) {
     if (!user) {
         return res.status(404).json({ message: "User not found " });
     }
-    res.status(200).json({ token: req.token, user });
+    const { password, ...userInfo } = user.dataValues;
+    res.status(200).json({ token: req.token, user: userInfo });
 }
 
 function createJWTToken(id: number) {

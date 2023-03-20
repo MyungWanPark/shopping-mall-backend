@@ -38,7 +38,6 @@ export const isAuth = async (
             return res.status(401).json(AUTH_ERROR);
         }
         req.userId = decodedPayload.id;
-        console.log(`user id = ${decodedPayload.id}`);
         req.token = token;
         next();
     });

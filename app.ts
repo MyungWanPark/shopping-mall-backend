@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOption));
 app.use(helmet());
-// app.use(morgan("tiny"));
+app.use(morgan("tiny"));
 
 app.use("/auth", authRouter);
 app.use("/user", userRouter);

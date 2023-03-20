@@ -29,10 +29,15 @@ export async function getCartItemsByCartId(cartId: number) {
     });
 }
 
-export async function getCartItemByProductId(productId: number) {
+export async function getCartItemByProductId(
+    productId: number,
+    cartId: number
+) {
     return await CartItem.findOne({
         where: {
             productId,
+            cartId,
+            isOrdered: false,
         },
     });
 }
