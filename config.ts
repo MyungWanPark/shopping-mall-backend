@@ -26,7 +26,7 @@ export const config = {
         port: parseInt(required("DB_PORT")),
     },
     cors: {
-        allowedOrigin: required("CORS_ALLOW_ORIGIN"),
+        allowedOrigin: required("CORS_ALLOW_ORIGIN").split(" "),
     },
     csrf: {
         plainToken: required("CSRF_SECRET_KEY"),
