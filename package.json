@@ -2,11 +2,11 @@
     "name": "shopping-mall-backend",
     "version": "1.0.0",
     "description": "",
-    "main": "app.js",
+    "main": "dist/app.js",
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node dist/app"
+        "start": "concurrently \"tsc -w\" \"nodemon dist/app\""
     },
     "keywords": [],
     "author": "",
