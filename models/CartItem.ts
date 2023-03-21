@@ -26,46 +26,53 @@ interface CartItemModel
     createdAt?: Date;
 }
 
-export const CartItem = sequelize.define<CartItemModel>("cartItem", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true,
-        unique: true,
+export const CartItem = sequelize.define<CartItemModel>(
+    "cartItem",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false,
+            primaryKey: true,
+            unique: true,
+        },
+        isSelected: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true,
+            allowNull: false,
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        color: {
+            type: DataTypes.STRING(45),
+            allowNull: false,
+        },
+        size: {
+            type: DataTypes.STRING(45),
+            allowNull: false,
+        },
+        totalPricePerProduct: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        isOrdered: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+            allowNull: false,
+        },
+        cartId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
+        productId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     },
-    isSelected: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-        allowNull: false,
-    },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    color: {
-        type: DataTypes.STRING(45),
-        allowNull: false,
-    },
-    size: {
-        type: DataTypes.STRING(45),
-        allowNull: false,
-    },
-    totalPricePerProduct: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    isOrdered: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-        allowNull: false,
-    },
-    cartId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    productId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-});
+    {
+        charset: "utf8mb4 ",
+        collate: "utf8mb4_general_ci",
+    }
+);

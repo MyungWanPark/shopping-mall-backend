@@ -18,12 +18,19 @@ export interface CartModel
     userId?: ForeignKey<number>;
 }
 
-export const Cart = sequelize.define<CartModel>("cart", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true,
-        unique: true,
+export const Cart = sequelize.define<CartModel>(
+    "cart",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false,
+            primaryKey: true,
+            unique: true,
+        },
     },
-});
+    {
+        charset: "utf8mb4 ",
+        collate: "utf8mb4_general_ci",
+    }
+);

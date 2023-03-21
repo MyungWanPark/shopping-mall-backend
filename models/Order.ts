@@ -20,22 +20,29 @@ interface OrderModel
     createdAt?: Date;
 }
 
-export const Order = sequelize.define<OrderModel>("order", {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true,
-        unique: true,
-    },
+export const Order = sequelize.define<OrderModel>(
+    "order",
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false,
+            primaryKey: true,
+            unique: true,
+        },
 
-    cartItemIds: {
-        type: DataTypes.STRING(45),
-        allowNull: false,
-    },
+        cartItemIds: {
+            type: DataTypes.STRING(45),
+            allowNull: false,
+        },
 
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+        },
     },
-});
+    {
+        charset: "utf8mb4 ",
+        collate: "utf8mb4_general_ci",
+    }
+);
