@@ -29,6 +29,7 @@
 - Auth: Custom middleware using JWT
   
 </details>
+<br/>
 
 ## Features 
 
@@ -54,7 +55,7 @@
     - Sales by Day Shown by Chart
     - Top 5 Items of Sales Shown by Chart
     - User's inflow route data Shown by Chart
-
+<br/>
 
 ### Detail Images 
 (이미지 클릭 시, 큰 화면으로 보실 수 있습니다.)
@@ -79,6 +80,7 @@
 - [New Products](#New-Products)
   - [New Product](#New-Product)
   - [After New Product](#After-New-Product)
+<br/>
 
 ## Basic
 
