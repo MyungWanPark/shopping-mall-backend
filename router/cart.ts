@@ -15,7 +15,7 @@ import { isAuth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.get("/", isAuth, cartController.getCartItemsByDate);
+router.get("/", cartController.getCartItemsByDate);
 router.get("/all", isAuth, cartController.getAllCartItems);
 router.post("/add", isAuth, cartController.addCart);
 // router.post("/new", isAuth, cartController.createCart);
