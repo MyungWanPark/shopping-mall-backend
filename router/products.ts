@@ -22,6 +22,6 @@ const router = express.Router();
 
 router.get("/", productController.getProducts);
 router.get("/:id", productController.getProductInfo);
-router.post("/new", isAuth, productController.addProduct);
+router.post("/new", productController.addProduct);
 
 export default router;

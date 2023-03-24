@@ -30,7 +30,7 @@ export async function createOrder(req: AuthRequest, res: Response) {
     res.status(200).json(orderInfo);
 }
 
-export async function getOrder(req: AuthRequest, res: Response) {
+/* export async function getOrder(req: AuthRequest, res: Response) {
     const isByUserId = req.query.byUser;
     const isByPeriod = req.query.startDate;
 
@@ -44,7 +44,7 @@ export async function getOrder(req: AuthRequest, res: Response) {
     }
 
     return res.status(401).json("queryParms not exist");
-}
+} */
 
 export async function getAllOrders(req: AuthRequest, res: Response) {
     const orderInfos = await orderAPIS.getAllOrders();
