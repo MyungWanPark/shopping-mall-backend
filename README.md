@@ -27,8 +27,9 @@
   - <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" />
 - ORM
   - <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
-- Design Pattern: Model-View-Controller
+- Design Pattern: MVC
 - Auth: Custom middleware using JWT
+- RESTful API
   
 </details>
 <br/>
