@@ -44,7 +44,7 @@
   - Create product
 
 - Cart(장바구니)
-  - Add to Cart (장바구니에 추가, 중복 상품 추가 방지)
+  - Create Cart (장바구니에 추가, 중복 상품 추가 방지)
   - Read Cart (장바구니에 추가한 상품 조회)
   - Update Cart (상품 수량을 변경 가능)
   - Delete Cart (상품을 장바구니에서 제거)
