@@ -1,5 +1,7 @@
 # Shopping Mall Side Project (Back-end)
 
+### (현재 배포환경이 유료로 전환되어 서비스 동작이 중지되었습니다. 3월까지 다른 클라우드 환경으로 배포하여 수정하겠습니다.)
+
 ### Version
 [![express version](https://img.shields.io/badge/Express-4.18.2-green.svg?style=flat-square)](https://react.dev)
 [![node version](https://img.shields.io/badge/Node-18.x-orange.svg?style=flat-square)](https://nodejs.org/en)
