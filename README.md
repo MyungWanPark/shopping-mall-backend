@@ -19,18 +19,18 @@
 <details open="open">
 <summary>Skills Used</summary>
   
-- Language: 
+- 개발 언어: 
     - <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
 
-- Framework: 
+- 프레임워크: 
   - <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white" /> in Node.js Environment
 
 - DB
   - <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" />
 - ORM
   - <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
-- Design Pattern: MVC
-- Auth: Custom middleware using JWT
+- 디자인패턴: MVC
+- 인증: Custom middleware using JWT
 - RESTful API
   
 </details>
@@ -38,20 +38,20 @@
 
 ## Features 
 
-- Auth(인증)
+- 인증
   - Login, Register, Keep Session (by JWT)
 
-- Product(제품)
+- 제품
   - Show products (by category, by search keyword, by All)
   - Create product
 
-- Cart(장바구니)
+- 장바구니
   - Create Cart (장바구니에 추가, 중복 상품 추가 방지)
   - Read Cart (장바구니에 추가한 상품 조회)
   - Update Cart (상품 수량을 변경 가능)
   - Delete Cart (상품을 장바구니에서 제거)
 
-- Analytics(분석)
+- 애널리틱스
   - Query data based on selected period.(선택한 기간에 따른 데이터 조회)
     - Total Sales amount
     - New Users number
@@ -68,21 +68,21 @@
 - [Basic](#Basic)
   - [Index](#Index)
 
-- [Auth](#Auth)
+- [인증](#인증)
   - [Login](#Login)
   - [Register](#Register)
   - [After Login](#After-Login)
-- [Products](#Products)
+- [제품](#제품)
   - [Men's Category](#Men's-Category)
   - [Keyword Search](#Keyword-Search)
-- [Cart](#Cart)
+- [장바구니](#장바구니)
   - [My Cart](#My-Cart)
   - [Cart Option](#Cart-Option)
-- [Analytics](#Analytics)
+- [애널리틱스](#애널리틱스)
   - [Analytics Set Dates](#Analytics-Set-Dates)
   - [Analytics Sales](#Analytics-Sales)
   - [Analytics User Inflow](#Analytics-User-Inflow)
-- [New Products](#New-Products)
+- [제품 추가](#제품-추가)
   - [New Product](#New-Product)
   - [After New Product](#After-New-Product)
 <br/>
@@ -98,7 +98,7 @@
 
 <br/>
 
-## Auth
+## 인증
 
 ### Login
 로그인 화면 입니다. Kakao Login 은 구현할 예정입니다.
@@ -127,7 +127,7 @@
 
 <br/>
 
-## Products
+## 제품
 
 ### Men's Category
 네비게이션 바에서 Men을 클릭하면, 남성 의류 상품들을 보여줍니다. 
@@ -156,7 +156,7 @@
 
 <br/>
 
-## Cart
+## 장바구니
 
 ### My Cart
 장바구니 페이지 입니다. 
@@ -178,7 +178,7 @@
 
 <br/>
 
-## Analytics
+## 애널리틱스
 
 ### Analytics Date Setting
 애널리틱스 페이지 입니다. <br/>
@@ -211,7 +211,7 @@
 
 <br/>
 
-## New Products
+## 제품-추가
 
 ### New Product
 새로운 제품을 등록할 수 있는 화면입니다. <br/>
