@@ -38,17 +38,17 @@
 ## Features 
 
 - 인증
-  - Login, Register, Keep Session (by JWT)
+  - JWT를 활용한 Login, Register
 
 - 제품
-  - Show products (by category, by search keyword, by All)
+  - Show products by category, search keyword
   - Create product
 
 - 장바구니
-  - Create Cart (장바구니에 추가, 중복 상품 추가 방지)
-  - Read Cart (장바구니에 추가한 상품 조회)
-  - Update Cart (상품 수량을 변경 가능)
-  - Delete Cart (상품을 장바구니에서 제거)
+  - Add to Cart 
+  - Read Cart 
+  - Update Cart 
+  - Delete Cart 
 
 - 애널리틱스
   - Query data based on selected period.(선택한 기간에 따른 데이터 조회)
@@ -59,6 +59,9 @@
     - Sales by Day Shown by Chart
     - Top 5 Items of Sales Shown by Chart
     - User's inflow route data Shown by Chart
+
+- 반응형 웹사이트
+
 <br/>
 
 ### Detail Images 
