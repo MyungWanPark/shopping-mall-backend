@@ -1,7 +1,5 @@
 # Shopping Mall Side Project (Back-end)
 
-### (현재 배포환경이 유료로 전환되어 서비스 동작이 중지되었습니다. 3월까지 다른 클라우드 환경으로 배포하여 수정하겠습니다.)
-
 ### Version
 [![express version](https://img.shields.io/badge/Express-4.18.2-green.svg?style=flat-square)](https://react.dev)
 [![node version](https://img.shields.io/badge/Node-18.x-orange.svg?style=flat-square)](https://nodejs.org/en)
@@ -18,19 +16,20 @@
 
 <details open="open">
 <summary>Skills Used</summary>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" /> <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white" /> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" /> <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
   
-- 개발 언어: 
-    - <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
+- 개발 언어: 타입스크립트
 
-- 프레임워크: 
-  - <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white" /> in Node.js Environment
+- 프레임워크: Express.js (Node Environment)
 
-- DB
-  - <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" />
-- ORM
-  - <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
+- DB: MySQL
+  
+- ORM: Sequelize
+  
 - 디자인패턴: MVC
-- 인증: Custom middleware using JWT
+  
+- 인증: JWT
+  
 - RESTful API
   
 </details>
@@ -101,7 +100,7 @@
 ## 인증
 
 ### Login
-로그인 화면 입니다. Kakao Login 은 구현할 예정입니다.
+로그인 화면 입니다. 
 
 <br/>
 
