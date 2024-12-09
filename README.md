@@ -1,16 +1,15 @@
-# Shopping Mall Side Project (Back-end)
+## 주제: React.js, Express(Node.js 환경)를 활용한 온라인 쇼핑몰 구현 (백엔드 레포)
+역할 및 범위: 풀스택, 개인 프로젝트
 
 ### Version
 [![express version](https://img.shields.io/badge/Express-4.18.2-green.svg?style=flat-square)](https://react.dev)
 [![node version](https://img.shields.io/badge/Node-18.x-orange.svg?style=flat-square)](https://nodejs.org/en)
 
-### Theme: Clothing Shopping Mall (의류 쇼핑 몰)
-
 <br/>
 
 > Click the link to view Demo.&nbsp;&nbsp; [Demo 보러가기 ](https://shoppingmall-myungwan.netlify.app) <br/>
 
-(빠른 로그인을 위해 ID: a@a 비밀번호: 1234 이용하셔도 됩니다 😊)
+빠른 로그인을 위해 ID: a@a 비밀번호: 1234 이용하셔도 됩니다 :)
 
 <br/>
 
