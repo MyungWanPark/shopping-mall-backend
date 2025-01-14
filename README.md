@@ -1,4 +1,4 @@
-## 주제: React.js, Express(Node.js 환경)를 활용한 온라인 쇼핑몰 구현 (백엔드 레포)
+## 주제: React, Express를 활용한 온라인 쇼핑몰 구현 (백엔드 저장소)
 역할 및 범위: 풀스택, 개인 프로젝트
 
 ### Version
@@ -17,9 +17,9 @@
 <summary>Skills Used</summary>
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" /> <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white" /> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" /> <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
   
-- 개발 언어: 타입스크립트 4.9.5
+- 개발 언어: TypeScript 4.9.5
 
-- 프레임워크: Express.js 4.18.2 (Node Environment)
+- 프레임워크: Express 4.18.2 (Node Environment)
 
 - DB: MySQL
   
