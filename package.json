@@ -17,6 +17,7 @@
         "@types/cookie-parser": "^1.4.3",
         "@types/cors": "^2.8.13",
         "@types/express": "^4.17.17",
+        "@types/helmet": "^4.0.0",
         "@types/jsonwebtoken": "^9.0.1",
         "@types/morgan": "^1.9.4",
         "concurrently": "^7.6.0",

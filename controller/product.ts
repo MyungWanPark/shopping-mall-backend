@@ -5,15 +5,20 @@ import { ProductInfo } from "../types/product.js";
 export async function getProducts(req: Request, res: Response) {
     const category = req.query.category as string;
     const keyword = req.query.keyword as string;
+    const page = parseInt((req.query.page as string) || "1", 10);
+    let data;
 
     if (keyword) {
-        return getProductByKeyword(req, res);
+        data = await getProductByKeyword(keyword, page);
+    } else {
+        data = await (category === "all" || category == "null"
+            ? productAPIS.getAll(page)
+            : productAPIS.getByCategory(category, page));
     }
 
-    const data = await (category === "all" || category == "null"
-        ? productAPIS.getAll()
-        : productAPIS.getByCategory(category));
-    res.status(200).json(data);
+    const { totalPages, products, count } = data;
+
+    return res.status(200).json({ totalPages, products, count });
 }
 
 export async function addProduct(req: Request, res: Response) {
@@ -28,9 +33,10 @@ export async function getProductInfo(req: Request, res: Response) {
     res.status(200).json(product);
 }
 
-export async function getProductByKeyword(req: Request, res: Response) {
-    const keyword = req.query.keyword as string;
-    const product = await productAPIS.getAllByKeyword(keyword);
-
-    res.status(200).json(product);
+export async function getProductByKeyword(keyword: string, page: number) {
+    const { totalPages, products, count } = await productAPIS.getAllByKeyword(
+        keyword,
+        page
+    );
+    return { totalPages, products, count };
 }

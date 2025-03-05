@@ -8,6 +8,8 @@ const ORDER_DESC: {
     order: [["createdAt", "DESC"]],
 };
 
+const PER_PAGE = 10;
+
 export async function getByName(name: string) {
     return await Product.findOne({
         where: {
@@ -16,30 +18,58 @@ export async function getByName(name: string) {
     });
 }
 
-export async function getAll() {
-    return await Product.findAll({
+export async function getAll(page: number) {
+    const offset = (page - 1) * PER_PAGE;
+    const { count, rows } = await Product.findAndCountAll({
+        limit: PER_PAGE,
+        offset,
         ...ORDER_DESC,
     });
+
+    return {
+        totalPages: Math.ceil(count / PER_PAGE),
+        products: rows,
+        count,
+    };
 }
 
-export async function getAllByKeyword(keyword: string) {
-    return await Product.findAll({
+export async function getAllByKeyword(keyword: string, page: number) {
+    const offset = (page - 1) * PER_PAGE;
+    const { count, rows } = await Product.findAndCountAll({
         where: {
             name: {
                 [Op.like]: "%" + keyword + "%",
             },
         },
+        limit: PER_PAGE,
+        offset,
         ...ORDER_DESC,
     });
+
+    return {
+        totalPages: Math.ceil(count / PER_PAGE),
+        products: rows,
+        count,
+    };
 }
 
-export async function getByCategory(category: string) {
-    return await Product.findAll({
+export async function getByCategory(category: string, page: number) {
+    const offset = (page - 1) * PER_PAGE;
+
+    const { count, rows } = await Product.findAndCountAll({
         where: {
             category,
         },
+        limit: PER_PAGE,
+        offset,
         ...ORDER_DESC,
     });
+
+    return {
+        totalPages: Math.ceil(count / PER_PAGE),
+        products: rows,
+        count,
+    };
 }
 
 export async function getById(id: number) {
