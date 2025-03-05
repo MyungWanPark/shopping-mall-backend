@@ -1,34 +1,34 @@
-# Shopping Mall Side Project (Back-end)
+## 주제: React, Express를 활용한 온라인 쇼핑몰 구현 (백엔드 저장소)
+역할 및 범위: 풀스택, 개인 프로젝트
 
 ### Version
 [![express version](https://img.shields.io/badge/Express-4.18.2-green.svg?style=flat-square)](https://react.dev)
 [![node version](https://img.shields.io/badge/Node-18.x-orange.svg?style=flat-square)](https://nodejs.org/en)
 
-### Theme: Clothing Shopping Mall (의류 쇼핑 몰)
-
 <br/>
 
 > Click the link to view Demo.&nbsp;&nbsp; [Demo 보러가기 ](https://shoppingmall-myungwan.netlify.app) <br/>
 
-(빠른 로그인을 위해 ID: a@a 비밀번호: 1234 이용하셔도 됩니다 😊)
+빠른 로그인을 위해 ID: a@a 비밀번호: 1234 이용하셔도 됩니다 :)
 
 <br/>
 
 <details open="open">
 <summary>Skills Used</summary>
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" /> <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white" /> <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" /> <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
   
-- Language: 
-    - <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white" />
+- 개발 언어: TypeScript 4.9.5
 
-- Framework: 
-  - <img src="https://img.shields.io/badge/Express-000000?style=flat&logo=Express&logoColor=white" /> in Node.js Environment
+- 프레임워크: Express 4.18.2 (Node Environment)
 
-- DB
-  - <img src="https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=MySQL&logoColor=white" />
-- ORM
-  - <img src="https://img.shields.io/badge/Sequelize-52B0E7?style=flat&logo=Sequelize&logoColor=white" />
-- Design Pattern: MVC
-- Auth: Custom middleware using JWT
+- DB: MySQL
+  
+- ORM: Sequelize
+  
+- 디자인패턴: MVC
+  
+- 인증: JWT
+  
 - RESTful API
   
 </details>
@@ -36,20 +36,20 @@
 
 ## Features 
 
-- Auth(인증)
-  - Login, Register, Keep Session (by JWT)
+- 인증
+  - JWT를 활용한 Login, Register
 
-- Product(제품)
-  - Show products (by category, by search keyword, by All)
+- 제품
+  - Show products by category, search keyword
   - Create product
 
-- Cart(장바구니)
-  - Add to Cart (장바구니에 추가, 중복 상품 추가 방지)
-  - Read Cart (장바구니에 추가한 상품 조회)
-  - Update Cart (상품 수량을 변경 가능)
-  - Delete Cart (상품을 장바구니에서 제거)
+- 장바구니
+  - Add to Cart 
+  - Read Cart 
+  - Update Cart 
+  - Delete Cart 
 
-- Analytics(분석)
+- 애널리틱스
   - Query data based on selected period.(선택한 기간에 따른 데이터 조회)
     - Total Sales amount
     - New Users number
@@ -58,6 +58,9 @@
     - Sales by Day Shown by Chart
     - Top 5 Items of Sales Shown by Chart
     - User's inflow route data Shown by Chart
+
+- 반응형 웹사이트
+
 <br/>
 
 ### Detail Images 
@@ -66,21 +69,21 @@
 - [Basic](#Basic)
   - [Index](#Index)
 
-- [Auth](#Auth)
+- [인증](#인증)
   - [Login](#Login)
   - [Register](#Register)
   - [After Login](#After-Login)
-- [Products](#Products)
+- [제품](#제품)
   - [Men's Category](#Men's-Category)
   - [Keyword Search](#Keyword-Search)
-- [Cart](#Cart)
+- [장바구니](#장바구니)
   - [My Cart](#My-Cart)
   - [Cart Option](#Cart-Option)
-- [Analytics](#Analytics)
+- [애널리틱스](#애널리틱스)
   - [Analytics Set Dates](#Analytics-Set-Dates)
   - [Analytics Sales](#Analytics-Sales)
   - [Analytics User Inflow](#Analytics-User-Inflow)
-- [New Products](#New-Products)
+- [제품 추가](#제품-추가)
   - [New Product](#New-Product)
   - [After New Product](#After-New-Product)
 <br/>
@@ -96,10 +99,10 @@
 
 <br/>
 
-## Auth
+## 인증
 
 ### Login
-로그인 화면 입니다. Kakao Login 은 구현할 예정입니다.
+로그인 화면 입니다. 
 
 <br/>
 
@@ -125,7 +128,7 @@
 
 <br/>
 
-## Products
+## 제품
 
 ### Men's Category
 네비게이션 바에서 Men을 클릭하면, 남성 의류 상품들을 보여줍니다. 
@@ -154,7 +157,7 @@
 
 <br/>
 
-## Cart
+## 장바구니
 
 ### My Cart
 장바구니 페이지 입니다. 
@@ -176,7 +179,7 @@
 
 <br/>
 
-## Analytics
+## 애널리틱스
 
 ### Analytics Date Setting
 애널리틱스 페이지 입니다. <br/>
@@ -209,7 +212,7 @@
 
 <br/>
 
-## New Products
+## 제품-추가
 
 ### New Product
 새로운 제품을 등록할 수 있는 화면입니다. <br/>
