@@ -18,6 +18,7 @@ const router = express.Router();
 router.get("/", cartController.getCartItemsByDate);
 router.get("/all", isAuth, cartController.getAllCartItems);
 router.post("/add", isAuth, cartController.addCart);
+router.post("/sync", isAuth, cartController.syncCart);
 // router.post("/new", isAuth, cartController.createCart);
 router.put("/update", isAuth, cartController.updateCartItem);
 router.delete("/delete", isAuth, cartController.deleteCartItem);

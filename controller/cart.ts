@@ -50,6 +50,45 @@ export async function addCart(req: AuthRequest, res: Response) {
     res.status(200).json(cartItemInfo);
 }
 
+export async function syncCart(req: AuthRequest, res: Response) {
+    const userId = req.userId as number;
+    const { cartItems }: { cartItems: CartItemType[] } = req.body;
+
+    if (!cartItems || cartItems.length === 0) {
+        return res.status(400).json({ message: "No cart items to sync." });
+    }
+
+    const cartInfo = await cartAPIS.getCartByUserId(userId);
+    if (!cartInfo) {
+        return res.status(404).json({ message: "User cart not found" });
+    }
+
+    const cartId = cartInfo.id as number;
+
+    for (const item of cartItems) {
+        const cartItem = await cartAPIS.getCartItemByProductId(
+            item.productId!,
+            cartId
+        );
+
+        const existingItem = cartItem?.dataValues;
+
+        if (existingItem && !existingItem.isOrdered) {
+            await cartAPIS.updateCartItem(userId, {
+                ...existingItem,
+                quantity: existingItem.quantity! + item.quantity!,
+            });
+        } else {
+            await cartAPIS.addToCart(userId, item);
+        }
+    }
+
+    const updatedCart = await cartAPIS.getCartItemsByCartId(cartId);
+    return res
+        .status(200)
+        .json({ message: "Cart Synchronized!", cart: updatedCart });
+}
+
 export async function updateCartItem(req: AuthRequest, res: Response) {
     const userId = req.userId as number;
     const cartItemBody: CartItemType = req.body;
