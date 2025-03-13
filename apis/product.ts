@@ -38,7 +38,7 @@ export async function getAllByKeyword(keyword: string, page: number) {
     const { count, rows } = await Product.findAndCountAll({
         where: {
             name: {
-                [Op.like]: "%" + keyword + "%",
+                [Op.regexp]: `(${keyword})`,
             },
         },
         limit: PER_PAGE,

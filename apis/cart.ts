@@ -96,7 +96,7 @@ export async function updateCartItem(
                 updatedItem.isOrdered == null
                     ? cartItem.isOrdered
                     : updatedItem.isOrdered;
-            cartItem.quantity = updatedItem.quantity;
+            cartItem.quantity = updatedItem.quantity!;
             cartItem.color = updatedItem.color;
             cartItem.size = updatedItem.size;
             cartItem.totalPricePerProduct =
