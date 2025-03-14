@@ -45,6 +45,8 @@ const router = express.Router();
 router.get("/register", authController.register);
 router.get("/login", authController.login);
 router.get("/me", isAuth, authController.me);
+router.get("/kakao", authController.kakaoLogin);
+router.get("/kakao/callback", authController.kakaoCallback);
 
 router.post("/register", authController.register);
 router.post("/login", authController.login);

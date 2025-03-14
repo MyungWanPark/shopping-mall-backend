@@ -75,6 +75,54 @@ export async function login(
     res.status(200).json({ token, user: userInfo });
 }
 
+export async function kakaoLogin(req: Request, res: Response) {
+    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}`;
+    return res.json({ url: kakaoAuthURL });
+}
+
+export async function kakaoCallback(req: Request, res: Response) {
+    const code = req.query.code as string;
+    console.log("code in kakaoCallback = ", code);
+    try {
+        const tokenResponse = await fetch(
+            "https://kauth.kakao.com/oauth/token",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/x-www-form-urlencoded;charset=utf-8",
+                },
+                body: new URLSearchParams({
+                    grant_type: "authorization_code",
+                    client_id: `${process.env.CLIENT_ID}`,
+                    redirect_uri: `${process.env.REDIRECT_URI}`,
+                    code: code,
+                    client_secret: `${process.env.CLIENT_SECRET}`,
+                }).toString(),
+            }
+        );
+
+        if (!tokenResponse.ok) throw new Error("Failed to fetch access token");
+        const tokenData = await tokenResponse.json();
+        const accessToken = tokenData.access_token;
+
+        const userResponse = await fetch("https://kapi.kakao.com/v2/user/me", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "Content-Type":
+                    "application/x-www-form-urlencoded;charset=utf-8",
+            },
+        });
+        if (!userResponse.ok) throw new Error("Failed to fetch user data");
+        const userData = await userResponse.json();
+
+        console.log("userData = ", userData);
+    } catch (e) {}
+
+    return res.json({ message: "success" });
+}
+
 export async function logout(req: Request, res: Response, next: NextFunction) {
     res.cookie("token", "");
     res.status(200).json({ message: "User has been logged out" });
