@@ -84,7 +84,7 @@ export async function login(
 }
 
 export async function kakaoLogin(req: Request, res: Response) {
-    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI_PROD}`;
+    const kakaoAuthURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}`;
     return res.json({ url: kakaoAuthURL });
 }
 
@@ -102,7 +102,7 @@ export async function kakaoCallback(req: Request, res: Response) {
                 body: new URLSearchParams({
                     grant_type: "authorization_code",
                     client_id: `${process.env.CLIENT_ID}`,
-                    redirect_uri: `${process.env.REDIRECT_URI_PROD}`,
+                    redirect_uri: `${process.env.REDIRECT_URI}`,
                     code: code,
                     client_secret: `${process.env.CLIENT_SECRET}`,
                 }).toString(),
@@ -135,7 +135,7 @@ export async function kakaoCallback(req: Request, res: Response) {
             const token = createJWTToken(user.id!);
             setToken(res, token);
             const { ...userInfo } = user.dataValues;
-            return res.redirect(`${process.env.CLIENT_REDIRECT_URI_PROD}/auth`);
+            return res.redirect(`${process.env.CLIENT_REDIRECT_URI}/auth`);
         }
     } catch (e) {}
 }
@@ -157,7 +157,7 @@ async function registerWithKakao(
     const token = createJWTToken(userId!);
     setToken(res, token);
     const { ...userInfo } = user;
-    return res.redirect(`${process.env.CLIENT_REDIRECT_URI_PROD}/auth`);
+    return res.redirect(`${process.env.CLIENT_REDIRECT_URI}/auth`);
 }
 export async function logout(req: Request, res: Response, next: NextFunction) {
     res.cookie("token", "");

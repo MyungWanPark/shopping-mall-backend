@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -18,6 +19,8 @@ import { User } from "./models/User.js";
 import { Product } from "./models/Product.js";
 import { CartItem } from "./models/CartItem.js";
 import { Order } from "./models/Order.js";
+import dotenv from "dotenv";
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app = express();
 
@@ -42,6 +45,11 @@ app.use("/order", orderRouter);
 app.use("/", (req, res, next) => {
     res.send("hello world!!!");
 });
+
+app.get("*", (req, res) => {
+    res.redirect(`${process.env.CLIENT_REDIRECT_URI}/`);
+});
+
 app.use((req, res, next) => {
     res.sendStatus(404);
 });
