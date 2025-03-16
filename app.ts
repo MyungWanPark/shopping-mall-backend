@@ -39,8 +39,6 @@ app.use("/products", productRouter);
 app.use("/cart", cartRouter);
 app.use("/order", orderRouter);
 
-// app.use("/auth", analyticsRouter);
-
 app.use("/", (req, res, next) => {
     res.send("hello world!!!");
 });

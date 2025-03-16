@@ -14,6 +14,14 @@ export async function findById(id: number) {
     return await User.findByPk(id);
 }
 
+export async function findByKakaoId(kakaoId: string) {
+    return await User.findOne({
+        where: {
+            kakaoId,
+        },
+    });
+}
+
 export async function createUser(user: UserInfo) {
     return await User.create(user).then((data) => data.dataValues.id);
 }

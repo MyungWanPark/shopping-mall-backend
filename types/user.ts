@@ -7,4 +7,5 @@ export type UserInfo = {
     age?: string;
     inflowRoute?: string;
     isAdmin?: boolean;
+    kakaoId?: string;
 };

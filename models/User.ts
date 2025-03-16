@@ -25,6 +25,7 @@ interface UserModel
     isAdmin?: boolean;
     cartId?: ForeignKey<number>;
     createdAt?: Date;
+    kakaoId?: string;
 }
 
 export const User = sequelize.define<UserModel>(
@@ -39,11 +40,11 @@ export const User = sequelize.define<UserModel>(
         },
         email: {
             type: DataTypes.STRING(45),
-            allowNull: false,
+            allowNull: true,
         },
         password: {
             type: DataTypes.STRING(128),
-            allowNull: false,
+            allowNull: true,
         },
         name: {
             type: DataTypes.STRING(45),
@@ -51,18 +52,23 @@ export const User = sequelize.define<UserModel>(
         },
         gender: {
             type: DataTypes.STRING(45),
-            allowNull: false,
+            allowNull: true,
         },
         age: {
             type: DataTypes.TEXT,
         },
         inflowRoute: {
             type: DataTypes.STRING(45),
-            allowNull: false,
+            allowNull: true,
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
+        },
+        kakaoId: {
+            type: DataTypes.STRING(100),
+            allowNull: true,
+            unique: true,
         },
     },
     {

@@ -12,6 +12,14 @@ import * as userRepository from "../apis/user.js";
 import * as cartRepository from "../apis/cart.js";
 import { AuthRequest } from "../types/auth.js";
 
+/* 
+    1. 카톡으로 로그인
+    2. 카톡 닉네임으로 기존 회원인지 확인
+        2-1. 기존 회원이면 로그인 처리
+        2-2. 새로운 회원이면 새로운 계정을 자동으로 생성
+            1. 생성 후, 로그인 처리.
+*/
+
 export async function register(
     req: Request & { userId?: number; token?: string },
     res: Response,
@@ -82,7 +90,6 @@ export async function kakaoLogin(req: Request, res: Response) {
 
 export async function kakaoCallback(req: Request, res: Response) {
     const code = req.query.code as string;
-    console.log("code in kakaoCallback = ", code);
     try {
         const tokenResponse = await fetch(
             "https://kauth.kakao.com/oauth/token",
@@ -116,13 +123,42 @@ export async function kakaoCallback(req: Request, res: Response) {
         });
         if (!userResponse.ok) throw new Error("Failed to fetch user data");
         const userData = await userResponse.json();
+        const kakaoId = userData.id.toString();
+        const { nickname } = userData.kakao_account.profile;
+        const user = await userRepository.findByKakaoId(kakaoId);
 
-        console.log("userData = ", userData);
+        if (!user) {
+            await registerWithKakao(kakaoId, nickname, res);
+        }
+
+        if (user) {
+            const token = createJWTToken(user.id!);
+            setToken(res, token);
+            const { ...userInfo } = user.dataValues;
+            return res.redirect(`${process.env.CLIENT_REDIRECT_URI_PROD}/auth`);
+        }
     } catch (e) {}
-
-    return res.json({ message: "success" });
 }
 
+async function registerWithKakao(
+    kakaoId: string,
+    nickname: string,
+    res: Response
+) {
+    const userId = await userRepository.createUser({
+        name: nickname,
+        kakaoId,
+    });
+    cartRepository.createCart(userId!);
+    const user = {
+        name: nickname,
+        kakaoId,
+    };
+    const token = createJWTToken(userId!);
+    setToken(res, token);
+    const { ...userInfo } = user;
+    return res.redirect(`${process.env.CLIENT_REDIRECT_URI_PROD}/auth`);
+}
 export async function logout(req: Request, res: Response, next: NextFunction) {
     res.cookie("token", "");
     res.status(200).json({ message: "User has been logged out" });
