@@ -19,7 +19,10 @@ import { User } from "./models/User.js";
 import { Product } from "./models/Product.js";
 import { CartItem } from "./models/CartItem.js";
 import { Order } from "./models/Order.js";
+import cron from "node-cron";
+
 import dotenv from "dotenv";
+import { makeDummyOrder, makeDummyUser } from "./util/dummyData.js";
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app = express();
@@ -63,6 +66,19 @@ app.use(
     ) => {
         console.error(error);
         res.sendStatus(500);
+    }
+);
+
+cron.schedule(
+    // "*/5 * * * * *",
+    "0 0 * * *",
+    async () => {
+        // console.log("매일 12시에 실행됨!");
+        await makeDummyOrder();
+        await makeDummyUser();
+    },
+    {
+        timezone: "Asia/Seoul",
     }
 );
 

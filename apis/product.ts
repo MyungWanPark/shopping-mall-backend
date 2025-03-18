@@ -18,6 +18,10 @@ export async function getByName(name: string) {
     });
 }
 
+export async function getAllProductsForDummyData() {
+    return await Product.findAll();
+}
+
 export async function getAll(page: number) {
     const offset = (page - 1) * PER_PAGE;
     const { count, rows } = await Product.findAndCountAll({
