@@ -22,7 +22,7 @@ import { Order } from "./models/Order.js";
 import cron from "node-cron";
 
 import dotenv from "dotenv";
-import { makeDummyOrder, makeDummyUser } from "./util/dummyData.js";
+import { makeDummyData } from "./util/dummyData.js";
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const app = express();
@@ -74,8 +74,7 @@ cron.schedule(
     "0 0 * * *",
     async () => {
         // console.log("매일 12시에 실행됨!");
-        await makeDummyOrder();
-        await makeDummyUser();
+        await makeDummyData();
     },
     {
         timezone: "Asia/Seoul",

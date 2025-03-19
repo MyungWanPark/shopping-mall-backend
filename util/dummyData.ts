@@ -46,9 +46,19 @@ import { getAllProductsForDummyData } from "../apis/product.js";
 import { createUser } from "../apis/user.js";
 import { CartItemType } from "../types/cart.js";
 
-export async function makeDummyOrder() {
-    console.log("▶️ 가상 데이터 주문 시작!!");
-    const userId = 11; // b@b.com 기준
+export async function makeDummyData() {
+    console.log("▶️ 가상 데이터 생성 시작!!");
+    await makeDummyOrder();
+    await makeDummyOrder();
+    await makeDummyOrder();
+    await makeDummyUser();
+    await makeDummyUser();
+    await makeDummyUser();
+    console.log("✨ 가상 데이터 제작 완료!!");
+}
+
+async function makeDummyOrder() {
+    const userId = 11; // 테스터 유저 b 기준
     const cartItemData = await makeDummyCartItemData();
     await addCart(userId, cartItemData); // 장바구니에 추가
     await createDummyOrder(userId); // 주문하기
@@ -94,7 +104,6 @@ async function createDummyOrder(userId: number) {
             isOrdered: true,
         });
     });
-    console.log("✨ 가상 데이터 주문 완료!!");
 }
 
 async function getDummyCartItemsAndIds(userId: number) {
@@ -107,10 +116,8 @@ async function getDummyCartItemsAndIds(userId: number) {
 }
 
 export async function makeDummyUser() {
-    console.log("▶️ 가상 유저 생성 시작");
     const user = getDummyUserData();
     const userId = await createUser(user); // 카트는 생성하지 않음
-    console.log("✨ 가상 유저 생성 완료");
 }
 
 function getDummyUserData() {
