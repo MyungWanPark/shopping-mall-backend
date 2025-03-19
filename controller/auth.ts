@@ -135,9 +135,7 @@ export async function kakaoCallback(req: Request, res: Response) {
             const token = createJWTToken(user.id!);
             setToken(res, token);
             const { ...userInfo } = user.dataValues;
-            return res.redirect(
-                `${process.env.CLIENT_REDIRECT_URI}?redirect=auth`
-            );
+            return res.redirect(`${process.env.CLIENT_REDIRECT_URI}`);
         }
     } catch (e) {}
 }
@@ -159,7 +157,7 @@ async function registerWithKakao(
     const token = createJWTToken(userId!);
     setToken(res, token);
     const { ...userInfo } = user;
-    return res.redirect(`${process.env.CLIENT_REDIRECT_URI}?redirect=auth`);
+    return res.redirect(`${process.env.CLIENT_REDIRECT_URI}`);
 }
 export async function logout(req: Request, res: Response, next: NextFunction) {
     res.cookie("token", "");
