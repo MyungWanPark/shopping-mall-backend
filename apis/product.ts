@@ -22,6 +22,15 @@ export async function getAllProductsForDummyData() {
     return await Product.findAll();
 }
 
+export async function getAllWithoutPage() {
+    const products = await Product.findAll();
+    return {
+        totalPages: 0, // 임의 값
+        products,
+        count: 0, // 임의 값
+    };
+}
+
 export async function getAll(page: number) {
     const offset = (page - 1) * PER_PAGE;
     const { count, rows } = await Product.findAndCountAll({

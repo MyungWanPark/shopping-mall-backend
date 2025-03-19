@@ -10,10 +10,12 @@ export async function getProducts(req: Request, res: Response) {
 
     if (keyword) {
         data = await getProductByKeyword(keyword, page);
+    } else if (category === "all" || category == "null") {
+        data = await productAPIS.getAll(page);
+    } else if (category === "allWithoutPage") {
+        data = await productAPIS.getAllWithoutPage();
     } else {
-        data = await (category === "all" || category == "null"
-            ? productAPIS.getAll(page)
-            : productAPIS.getByCategory(category, page));
+        data = await productAPIS.getByCategory(category, page);
     }
 
     const { totalPages, products, count } = data;
