@@ -110,7 +110,7 @@ async function getDummyCartItemsAndIds(userId: number) {
     const cartId = await getCartByUserId(userId).then((cart) => cart?.id);
     const cartItems = await getCartItemsByCartId(cartId!);
     const cartItemIdsToOrder = cartItems
-        .filter((cartItem) => cartItem.isSelected)
+        .filter((cartItem) => cartItem.isSelected && !cartItem.isOrdered)
         .map((cartItem) => cartItem.id);
     return { cartItemIdsToOrder, cartItems };
 }
