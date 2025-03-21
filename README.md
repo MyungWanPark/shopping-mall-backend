@@ -1,4 +1,4 @@
-## 주제: React, Express를 활용한 온라인 쇼핑몰 구현 (백엔드 저장소)
+## React, Express를 활용한 온라인 쇼핑몰 구현 (백엔드)
 역할 및 범위: 풀스택, 개인 프로젝트
 
 ### Version
@@ -19,17 +19,17 @@
   
 - 개발 언어: TypeScript 4.9.5
 
-- 프레임워크: Express 4.18.2 (Node Environment)
+- 프레임워크: Express 4.18.2 (Node.js)
 
 - DB: MySQL
   
 - ORM: Sequelize
   
-- 디자인패턴: MVC
-  
-- 인증: JWT
+- 인증: OAuth2(카카오 로그인), JWT
   
 - RESTful API
+
+- 디자인패턴: MVC
   
 </details>
 <br/>
