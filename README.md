@@ -18,16 +18,16 @@
 
 ## 🛠️ Tech Stack
 
-- **🌏 Server** - Node.js with Express
-- **📃 Language** - TypeScript  <br/>
-- **🗄️ Database** - MySQL, Sequelize ORM
-- **🔑 사용자 인증** - OAuth2 with Kakao, JWT
-- **🧱 MVC architecture**
-- **📡 RESTful API**
+- **Server** - Node.js with Express
+- **Language** - TypeScript  <br/>
+- **Database** - MySQL, Sequelize ORM
+- **사용자 인증** - OAuth2 with Kakao, JWT
+- **MVC architecture**
+- **RESTful API**
 
 ## 📡 Deployment
-- **🖥️ Server** - CloudType
-- **🗄️ DB** - CloudType
+- **Server** - CloudType
+- **DB** - CloudType
 <br/>
 
 ## 🔗 Related Repositories
