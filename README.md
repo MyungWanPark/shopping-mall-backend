@@ -1,6 +1,19 @@
 # 🔙 Shopping Mall - Backend
 온라인 쇼핑몰 프로젝트의 **백엔드** 파트 입니다. <br/>
 
+## 🛠️ Tech Stack
+### 🧠 Backend
+- **Runtime**: Node.js with Express
+- **Language**: TypeScript
+- **Database**: MySQL with Sequelize ORM
+- **Authentication**: OAuth2 (Kakao), JWT
+- **Architecture**: MVC, RESTful API
+
+### ☁️ Deployment
+- **Backend**: CloudType
+- **Database**: CloudType (MySQL)
+<br/>
+
 ## 🚀 Key Features
 
 ### 👤 사용자 인증 & 권한
@@ -8,9 +21,9 @@
 - **JWT 기반 인증** – 자체 회원가입 및 로그인, 토큰 기반 사용자 인증 처리  
 
 ### 🛍️ 상품 조회 및 생성
-- **상품 목록 & 상세 페이지** – 상품 정보 조회, 장바구니 추가 기능
+- **상품 목록 & 상세 페이지** – 상품 상세 정보 조회, 옵션 지정하여 장바구니 추가 기능
 - **상품 등록 기능** – 새로운 상품을 등록할 수 있는 API 구현  
-- **카테고리별 상품 조회** – 남성, 여성, 가방 등 카테고리별 조회
+- **카테고리별 상품 조회** – 남성, 여성, 가방 등 카테고리별 상품 조회
 - **실시간 상품 검색** – 키워드 입력 시 관련 상품을 실시간으로 조회
 
 ### 🛒 장바구니 기능
@@ -22,21 +35,6 @@
 ### ⚡ 성능 개선
 - **React Query 캐싱** – 중복 네트워크 요청 방지
 - **Pagination** – 많은 양의 상품 데이터를 페이지 단위로 분할해 조회함으로써 서버 부하 감소  
-<br/>
-
-
-## 🛠️ Tech Stack
-
-- **Server** - Node.js with Express
-- **Language** - TypeScript  <br/>
-- **Database** - MySQL, Sequelize ORM
-- **사용자 인증** - OAuth2 with Kakao, JWT
-- **MVC architecture**
-- **RESTful API**
-
-## 📡 Deployment
-- **Server** - CloudType
-- **DB** - CloudType
 <br/>
 
 ## 🔗 Related Repositories
